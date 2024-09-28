@@ -27,10 +27,10 @@ ChartJS.register(
 
 interface CryptoDetailsProps {
   id: string;
-  onClose: () => void;
+  onBack: () => void; // Dodajemy funkcję do powrotu
 }
 
-const CryptoDetails: React.FC<CryptoDetailsProps> = ({ id, onClose }) => {
+const CryptoDetails: React.FC<CryptoDetailsProps> = ({ id, onBack }) => {
   const [chartData, setChartData] = useState<ChartData<'line'> | undefined>(); // Uwzględnienie undefined
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -78,17 +78,15 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ id, onClose }) => {
   if (loading) return <div className="text-center">Loading chart...</div>;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4">
-      <div className="bg-white p-4 rounded shadow-md w-full max-w-3xl relative">
-        <button
-          onClick={onClose}
-          className="absolute top-2 right-2 text-gray-600 hover:text-red-600"
-        >
-          Close
-        </button>
-        <h2 className="text-xl font-bold mb-4">Price Chart - Last 7 Days</h2>
-        {chartData && <Line data={chartData} />} {/* Sprawdzamy, czy chartData jest dostępne */}
-      </div>
+    <div className="p-4"> {/* Użyj normalnego opakowania dla wykresu */}
+      <button
+        onClick={onBack} // Przyciski do cofania
+        className="mb-4 text-blue-500 hover:underline"
+      >
+        &lt; Back to Gallery
+      </button>
+      <h2 className="text-xl font-bold mb-4">Price Chart - Last 7 Days</h2>
+      {chartData && <Line data={chartData} />} {/* Sprawdzamy, czy chartData jest dostępne */}
     </div>
   );
 };
