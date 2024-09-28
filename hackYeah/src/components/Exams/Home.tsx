@@ -17,18 +17,43 @@ const styles = {
     padding: "10px",
   } as React.CSSProperties,
 };
-const ExamStart = () => {
+const ExamStart = ({ level }: { level: number }) => {
   const [examOpen, setExamOpen] = useState<number | null>(null);
+  let recommendId = 0;
+  if (level >= 0) recommendId = 1;
+  if (level > 3) recommendId = 2;
+  if (level > 6) recommendId = 3;
   return (
     <>
       <div style={styles.container} className="bg-primary">
         <Sidebar />
         <div className="flex-1 m-4 rounded-sm p-2">
-          {Exams.map((exam) => (
+          Exam Recomennded to Pass into next level:
+          {recommendId < 3 ? (
             <div>
-              <button onClick={() => setExamOpen(exam.id)}>{exam.title}</button>
+              <button onClick={() => setExamOpen(Exams[recommendId].id)}>
+                {Exams[recommendId].title}
+              </button>
             </div>
-          ))}
+          ) : (
+            <span>
+              You have reached maximum level of knowledge that we provide
+            </span>
+          )}
+          All Exams:
+          <div className="flex space-x-2">
+  {Exams.map((exam) => (
+    <span
+      key={exam.id}
+      className="badge badge-white cursor-pointer"
+      onClick={() => setExamOpen(exam.id)}
+    >
+      {exam.title}
+    </span>
+  ))}
+</div>
+
+
 
           {examOpen != null && (
             <Exam
