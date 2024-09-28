@@ -12,7 +12,7 @@ const App = () => {
       <Routes>
         <Route index element={<Home />} />
         <Route path="/course" element={<Course />} />
-        <Route path="/exam" element={<ExamStart />} />
+        <Route path="/exams" element={<ExamStart />} />        
         <Route
           path="/traiding"
           element={
@@ -26,8 +26,7 @@ const App = () => {
                 <Traiding />
               </div>
             </div>
-          }
-        />
+          } />
       </Routes>
     </BrowserRouter>
   );
