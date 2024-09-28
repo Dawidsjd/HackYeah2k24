@@ -14,11 +14,11 @@ const App = () => {
         <Route path="/course" element={<Course />} />
         <Route path="/exercises" element={<Exercises />} />
         <Route path="/traiding" element={
-          <div className="flex bg-gray-900">
-            <div className="fixed h-full w-64">
+          <div className="flex bg-gray-900 w-full">
+            <div className="fixed h-full w-[64rem]">
               <Sidebar />
             </div>
-            <div className="flex-1 ml-64 m-4 overflow-auto"> {/* Ustaw margines dla kontenera */}
+            <div className="flex-1 ml-64 m-4 overflow-auto z-10"> {/* Ustaw margines dla kontenera */}
               <Traiding />
             </div>
           </div>
