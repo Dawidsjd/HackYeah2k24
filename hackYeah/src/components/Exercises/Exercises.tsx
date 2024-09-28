@@ -1,7 +1,5 @@
-import React from "react";
-import Sidebar from "../Global/Sidebar";
 import { Exercise } from "./Exercise";
-import { ExerciseType } from "../../type";
+import { ExerciseProps } from "../../type";
 
 export function shuffle(array: any[]) {
   let currentIndex = array.length;
@@ -16,11 +14,8 @@ export function shuffle(array: any[]) {
     ];
   }
 }
-type ExerciseProps = {
-  exercise: ExerciseType;
-};
+
 const Exercises = (props: ExerciseProps) => {
-  const [correct, setCorrect] = React.useState(false);
   var order = [0, 1, 2, 3];
   shuffle(order);
   const exercise = new Exercise(props.exercise);
@@ -34,15 +29,10 @@ const Exercises = (props: ExerciseProps) => {
     <div style={{ color: "white" }}>
       <div>{props.exercise.question}</div>
       {order.map((num) => (
-        <div
-          onClick={() => {
-            setCorrect(answersTab[num].correct);
-          }}
-        >
+        <div onClick={() => props.onAnswer(answersTab[num].correct)}>
           &nbsp;&nbsp;&nbsp;&nbsp;{answersTab[num].answer}
         </div>
       ))}
-      {correct && <div>Poprawnie!</div>}
     </div>
   );
 };

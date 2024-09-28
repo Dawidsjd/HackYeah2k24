@@ -4,14 +4,20 @@ export type ExerciseType = {
   question: string;
 };
 
+export type ExerciseProps = {
+  exercise: ExerciseType;
+  onAnswer: any;
+};
+
 export type ExamType = {
+  id: number;
   exercises: ExerciseType[];
   title: string;
 };
 
-export type ExerciseProps = {
-  exercise: ExerciseType;
-  onAnswer: Function;
+export type ExamProps = {
+  exercises: ExerciseType[];
+  title: string;
 };
 
 export type CourseType = {
