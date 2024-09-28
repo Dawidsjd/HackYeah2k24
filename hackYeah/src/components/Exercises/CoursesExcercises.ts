@@ -187,7 +187,7 @@ export const ModuleSevenExcercises: ExerciseType[] = [
   },
   {
     question:
-      "What are the major differences in cryptocurrency regulations across different ",
+      "What are the major differences in cryptocurrency regulations across different countries?",
     correctAnswer: "Different approaches to taxation and legality",
     falseAnswers: [
       "There are the same rules everywhere",
