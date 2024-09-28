@@ -15,19 +15,25 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route index element={<Home level={level} />} />
-        <Route path="/course" element={<Course />} />
+        <Route
+          path="/course"
+          element={<Course level={level} setLevel={setLevel} />}
+        />
         <Route path="/exams" element={<ExamStart />} />
-        <Route path="/knowledge-test" element={<KnowledgeTest setLevel={setLevel} />} />
+        <Route
+          path="/knowledge-test"
+          element={<KnowledgeTest setLevel={setLevel} />}
+        />
         <Route path="/traiding/positions" element={<Positions />} />
         <Route
           path="/traiding"
           element={
             <div className="flex bg-gray-900 w-full">
-              <div className="fixed h-full" style={{ width: "inherit" }}>
+              <div className="fixed h-full" style={{ width: 'inherit' }}>
                 <Sidebar />
               </div>
               <div className="flex-1 ml-48 overflow-auto">
-                {" "}
+                {' '}
                 {/* Ustaw margines dla kontenera */}
                 <Traiding />
               </div>
