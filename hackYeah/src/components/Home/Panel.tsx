@@ -6,7 +6,7 @@ import CryptoNews from './CryptoNews';
 const Panel = () => {
   const tileStyle = 'flex rounded-xl shadow-custom-light p-2 ';
   return (
-    <div className="flex flex-col w-full mt-2 space-y-4">
+    <div className="flex flex-col w-full mt-8 space-y-4">
       <div className="flex space-x-4">
         <div className={`justify-start w-1/2 bg-secondary ${tileStyle}`}>
           <CheckKnowledge />
@@ -16,7 +16,7 @@ const Panel = () => {
         </div>
       </div>
       <div className="flex space-x-4 mt-2">
-        <div className={`justify-start w-2/3 ${tileStyle}`}>
+        <div className={`justify-start w-2/3 bg-tail-gradient ${tileStyle}`}>
           <CryptoList />
         </div>
         <div className={`justify-end w-1/3 ${tileStyle}`}>
