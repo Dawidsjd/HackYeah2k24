@@ -9,10 +9,11 @@ import KnowledgeTest from './components/Global/KnowledgeTest';
 import Positions from './components/Trading/components/SubPages/Positions';
 
 const App = () => {
+  const [level, setLevel] = useState(-1);
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Home />} />
+        <Route index element={<Home level={level} />} />
         <Route path="/course" element={<Course />} />
         <Route path="/exams" element={<ExamStart />} />
         <Route path="/knowledge-test" element={<KnowledgeTest />} />
@@ -21,11 +22,11 @@ const App = () => {
           path="/traiding"
           element={
             <div className="flex bg-gray-900 w-full">
-              <div className="fixed h-full" style={{ width: 'inherit' }}>
+              <div className="fixed h-full" style={{ width: "inherit" }}>
                 <Sidebar />
               </div>
               <div className="flex-1 ml-48 overflow-auto">
-                {' '}
+                {" "}
                 {/* Ustaw margines dla kontenera */}
                 <Traiding />
               </div>
