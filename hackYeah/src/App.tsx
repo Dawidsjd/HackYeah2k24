@@ -6,6 +6,7 @@ import ExamStart from './components/Exams/Home';
 import Traiding from './components/Trading/Trading';
 import Sidebar from './components/Global/Sidebar';
 import KnowledgeTest from './components/Global/KnowledgeTest';
+import Positions from './components/Trading/components/SubPages/Positions';
 import { useState } from 'react';
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
           path="/knowledge-test"
           element={<KnowledgeTest setLevel={setLevel} />}
         />
+        <Route path="/traiding/positions" element={<Positions />} />
         <Route
           path="/traiding"
           element={

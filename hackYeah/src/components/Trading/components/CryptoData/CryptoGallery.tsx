@@ -41,10 +41,12 @@ const CryptoGallery: React.FC<CryptoGalleryProps> = ({ onCryptoSelect }) => {
     fetchCryptos();
   }, []);
 
-  if (loading) return <div className="text-center">Loading...</div>;
+  if (loading) return <div className="flex items-center justify-center min-h-screen">
+  <span className="loading loading-dots loading-lg"></span>
+</div>;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ml-[20px] gap-4 p-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ml-10 gap-4 p-4">
       {cryptos.map((crypto) => (
         <div
           key={crypto.id}

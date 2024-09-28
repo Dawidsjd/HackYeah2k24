@@ -14,8 +14,9 @@ const Navbar = () => {
     },
     {
       name: 'Positions',
-      link: '/',
+      link: '/traiding/positions',
     },
+    
   ];
 
   return (
