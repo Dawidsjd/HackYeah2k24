@@ -3,6 +3,7 @@ import { IoHomeOutline } from 'react-icons/io5';
 import { ImBooks } from 'react-icons/im';
 import { FaPencilAlt } from 'react-icons/fa';
 import { GiTakeMyMoney } from 'react-icons/gi';
+import { LuUser2 } from "react-icons/lu";
 
 const Sidebar = () => {
   return (
@@ -10,8 +11,8 @@ const Sidebar = () => {
       <a href="#">{/* Logo */}</a>
 
       <div className="flex flex-col justify-between flex-1 mt-6">
-        <nav className="-mx-3 space-y-6 ">
-          <div className="space-y-3 ">
+        <nav className="-mx-3 space-y-6">
+          <div className="space-y-3">
             <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">
               content
             </label>
@@ -41,10 +42,21 @@ const Sidebar = () => {
               className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
             >
               <GiTakeMyMoney />
-              <span className="mx-2 text-sm font-medium">Demo Traiding</span>
+              <span className="mx-2 text-sm font-medium">Demo Traiding</span>  
             </NavLink>
           </div>
         </nav>
+
+        {/* Settings Link at the Bottom, in the same nav section */}
+        <div className="mt-auto">
+          <NavLink
+            to={'/settings'}
+            className= "flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+          >
+            <LuUser2 />
+            <span className="mx-2 text-sm font-medium">Settings</span>
+          </NavLink>
+        </div>
       </div>
     </aside>
   );
