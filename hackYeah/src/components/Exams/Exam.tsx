@@ -1,8 +1,5 @@
-import React from 'react';
-
-const Exam = () => {
-
-  return 
+const ExamStart = () => {
+  return;
 };
 
-export default Exam;
+export default ExamStart;
