@@ -3,12 +3,12 @@ import { IoHomeOutline } from 'react-icons/io5';
 import { ImBooks } from 'react-icons/im';
 import { FaPencilAlt } from 'react-icons/fa';
 import { GiTakeMyMoney } from 'react-icons/gi';
-import Logo from '../../assets/25c61999-863f-4e6a-b440-da5f296ec0e3.jfif.jpeg';
 import { LuUser2 } from 'react-icons/lu';
+import Logo from '../../assets/25c61999-863f-4e6a-b440-da5f296ec0e3.jfif.jpeg';
 
 const Sidebar = () => {
   return (
-    <aside className="flex flex-col w-1/5 h-screen px-5 py-8 overflow-y-auto bg-gray-900 rounded-tr-xl rounded-br-xl">
+    <aside className="flex flex-col w-1/5 h-screen px-5 py-8 overflow-y-auto bg-gray-900">
       <NavLink to="/" className="flex items-center space-x-2">
         <img src={Logo} alt="logo" className="w-8 h-8 rounded-full" />
         <p className="text-tertiary">Investify</p>
