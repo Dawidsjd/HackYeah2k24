@@ -1,62 +1,105 @@
-// CryptoDetails.tsx
-import React, { useState, useEffect } from 'react'; // Import useEffect
-import TradingViewWidget from './TradingViewWidget'; // Upewnij się, że ścieżka jest poprawna
-import { FiPlus } from 'react-icons/fi'; // Import ikony "+" z react-icons
-import { ArrowUpCircle, ArrowDownCircle, ArrowDownUp } from 'lucide-react'; // Import ikony do przycisków
+import React, { useState, useEffect } from 'react';
+import TradingViewWidget from './TradingViewWidget';
+import { FiPlus } from 'react-icons/fi';
+import { ArrowUpCircle, ArrowDownCircle, ArrowDownUp } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface CryptoDetailsProps {
-  onBack: () => void; // Dodajemy funkcję do powrotu
+  onBack: () => void;
 }
 
 const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false); // Stan do zarządzania modalem
-  const [actionType, setActionType] = useState<'buy' | 'sell' | null>(null); // Typ akcji
-  const [usdAmount, setUsdAmount] = useState(''); // Kwota w dolarach
-  const [btcAmount, setBtcAmount] = useState(''); // Kwota w BTC
-  const [btcLogo, setBtcLogo] = useState(''); // Logo BTC
-  const [usdtLogo, setUsdtLogo] = useState(''); // Logo USDT
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [actionType, setActionType] = useState<'buy' | 'sell' | null>(null);
+  const [usdAmount, setUsdAmount] = useState('');
+  const [btcAmount, setBtcAmount] = useState('');
+  const [btcLogo, setBtcLogo] = useState('');
+  const [usdtLogo, setUsdtLogo] = useState('');
+  const [btcPrice, setBtcPrice] = useState(0);
+  const [alertVisible, setAlertVisible] = useState(false);
 
   useEffect(() => {
-    // Funkcja do pobierania logo
-    const fetchLogos = async () => {
+    const fetchLogosAndRate = async () => {
       try {
         const btcResponse = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin');
         const btcData = await btcResponse.json();
-        setBtcLogo(btcData.image.small); // Ustaw logo BTC
+        setBtcLogo(btcData.image.small);
 
         const usdtResponse = await fetch('https://api.coingecko.com/api/v3/coins/tether');
         const usdtData = await usdtResponse.json();
-        setUsdtLogo(usdtData.image.small); // Ustaw logo USDT
+        setUsdtLogo(usdtData.image.small);
+
+        const priceResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
+        const priceData = await priceResponse.json();
+        setBtcPrice(priceData.bitcoin.usd);
       } catch (error) {
-        console.error('Error fetching logos:', error);
+        console.error('Error fetching logos or price:', error);
       }
     };
 
-    fetchLogos(); // Wywołaj funkcję po zamontowaniu komponentu
+    fetchLogosAndRate();
   }, []);
 
   const handleOpenModal = (type: 'buy' | 'sell') => {
-    setActionType(type); // Ustaw typ akcji
-    setIsModalOpen(true); // Otwórz modal
-    setUsdAmount(''); // Resetuj kwoty
+    setActionType(type);
+    setIsModalOpen(true);
+    setUsdAmount('');
     setBtcAmount('');
+    setAlertVisible(false);
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false); // Zamknij modal
-    setActionType(null); // Resetuj typ akcji
+    setIsModalOpen(false);
+    setActionType(null);
+  };
+
+  const handleUsdChange = (value: string) => {
+    const usdValue = parseFloat(value);
+    if (usdValue >= 0) {
+      setUsdAmount(value);
+      if (!isNaN(usdValue) && btcPrice > 0) {
+        const btcValue = usdValue / btcPrice;
+        setBtcAmount(btcValue.toFixed(6));
+      } else {
+        setBtcAmount('');
+      }
+    } else {
+      setUsdAmount('');
+      setBtcAmount('');
+    }
+  };
+
+  const handleBtcChange = (value: string) => {
+    const btcValue = parseFloat(value);
+    if (btcValue >= 0) {
+      setBtcAmount(value);
+      if (!isNaN(btcValue) && btcPrice > 0) {
+        const usdValue = btcValue * btcPrice;
+        setUsdAmount(usdValue.toFixed(2));
+      } else {
+        setUsdAmount('');
+      }
+    } else {
+      setBtcAmount('');
+      setUsdAmount('');
+    }
   };
 
   const handleExchange = () => {
-    // Logika wymiany
-    console.log(`Exchange ${usdAmount} USD for ${btcAmount} BTC`);
-    handleCloseModal(); // Zamknij modal po wymianie
+    setAlertVisible(true);
+    setIsModalOpen(false);
+    setActionType(null);
+    setUsdAmount('');
+    setBtcAmount('');
+    setTimeout(() => {
+      setAlertVisible(false);
+    }, 3000); // Alert will disappear after 3 seconds
   };
 
   return (
     <div className="relative p-4">
       <button
-        onClick={onBack} // Przyciski do cofania
+        onClick={onBack}
         className="mb-4 text-blue-500 hover:underline"
       >
         &lt; Back to Gallery
@@ -78,9 +121,8 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
         </div>
       </div>
     
-      <TradingViewWidget /> {/* Wstawienie komponentu TradingViewWidget */}
+      <TradingViewWidget />
 
-      {/* Buy and Sell buttons below the chart */}
       <div className="flex justify-center space-x-2 mt-4">
         <button 
           onClick={() => handleOpenModal('buy')}
@@ -98,68 +140,88 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
         </button>
       </div>
 
-{/* Modal */}
-{isModalOpen && (
-  <div className="fixed inset-0 flex items-center justify-center z-50">
-    <div className="modal modal-open">
-      <div className="modal-box relative">
-        <h2 className="font-bold text-lg">{actionType === 'buy' ? 'Buy Confirmation' : 'Sell Confirmation'}</h2>
-        
-        {/* Close button (X) in the top right corner */}
-        <button 
-          onClick={handleCloseModal} 
-          className="absolute top-2 right-4 text-gray-500 hover:text-gray-700 text-3xl"
-        >
-          &times; {/* Unicode for multiplication sign */}
-        </button>
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="modal modal-open">
+            <div className="modal-box relative">
+              <h2 className="font-bold text-lg">{actionType === 'buy' ? 'Buy Confirmation' : 'Sell Confirmation'}</h2>
+              <button 
+                onClick={handleCloseModal} 
+                className="absolute top-2 right-4 text-gray-500 hover:text-gray-700 text-3xl"
+              >
+                &times;
+              </button>
 
-        {actionType === 'buy' && (
-          <div>
-            <div className="py-4">
-              <label className="block text-sm">Amount in USD:</label>
-              <div className="flex items-center mb-2">
-                <img src={usdtLogo} alt="USDT Logo" className="h-6 w-6 mr-2" />
-              </div>
-              <input 
-                type="number" 
-                value={usdAmount} 
-                onChange={(e) => setUsdAmount(e.target.value)} 
-                className="input input-bordered w-full"
-                placeholder="Enter amount in USDT"
-              />
-            </div>
-            
-            {/* Ikona wymiany */}
-            <div className="flex justify-center -mb-[40px] mt-[10px]">
-              <ArrowDownUp className="h-6 w-6 text-gray-500" />
-            </div>
+              {actionType === 'buy' && (
+                <div>
+                  <div className="py-4">
+                    <label className="block text-sm">Amount in USD:</label>
+                    <div className="flex items-center mb-2">
+                      <img src={usdtLogo} alt="USDT Logo" className="h-6 w-6 mr-2" />
+                    </div>
+                    <input 
+                      type="number" 
+                      value={usdAmount} 
+                      onChange={(e) => handleUsdChange(e.target.value)}
+                      className="input input-bordered w-full"
+                      placeholder="Enter amount in USDT"
+                    />
+                  </div>
+                  
+                  <div className="flex justify-center -mb-[40px] mt-[10px]">
+                    <ArrowDownUp className="h-6 w-6 text-gray-500" />
+                  </div>
 
-            <div className="py-4">
-              <label className="block text-sm">Amount in BTC:</label>
-              <div className="flex items-center mb-2">
-                <img src={btcLogo} alt="BTC Logo" className="h-6 w-6 mr-2" />
-              </div>
-              <input 
-                type="number" 
-                value={btcAmount} 
-                onChange={(e) => setBtcAmount(e.target.value)} 
-                className="input input-bordered w-full"
-                placeholder="Enter amount in BTC"
-              />
+                  <div className="py-4">
+                    <label className="block text-sm">Amount in BTC:</label>
+                    <div className="flex items-center mb-2">
+                      <img src={btcLogo} alt="BTC Logo" className="h-6 w-6 mr-2" />
+                    </div>
+                    <input 
+                      type="text"
+                      value={btcAmount} 
+                      onChange={(e) => handleBtcChange(e.target.value)}
+                      className="input input-bordered w-full"
+                      placeholder="Enter amount in BTC"
+                    />
+                  </div>
+                  <button 
+                    onClick={handleExchange}
+                    className="btn bg-amber-400 hover:bg-amber-300 w-full mt-4 text-black"
+                  >
+                    Exchange
+                  </button>
+                </div>
+              )}
+              {/* Add logic for sell modal here */}
             </div>
-            <button onClick={handleExchange} className="btn bg-amber-400 hover:bg-amber-300 w-full mt-4 text-black">
-  Exchange
-</button>
-
           </div>
-        )}
-        {/* Możesz dodać więcej logiki dla sell modal tutaj */}
-      </div>
-    </div>
-  </div>
+        </div>
+      )}
+
+{alertVisible && (
+  <motion.div
+    role="alert"
+    initial={{ opacity: 0, x: 100 }}  // Initial state: hidden and off-screen to the right
+    animate={{ opacity: 1, x: 0 }}     // Animate to visible and move to original position
+    exit={{ opacity: 0, x: 100 }}       // Animate back to hidden and move off-screen to the right
+    transition={{ duration: 0.3 }}      // Transition duration
+    className="fixed bottom-4 right-4 w-1/2 z-50 alert alert-success mb-4 shadow-2xl"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-6 w-6 shrink-0 stroke-current"
+      fill="none"
+      viewBox="0 0 24 24">
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>Your purchase has been confirmed!</span>
+  </motion.div>
 )}
-
-
 
     </div>
   );
