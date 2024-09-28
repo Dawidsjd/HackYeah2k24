@@ -57,9 +57,9 @@
       {
         "fullscreen": false,
         "height": 600,
-        "resizable": true,
+        "resizable": false,
         "title": "hackyeah",
-        "width": 800
+        "width": 1000
       }
     ]
   }
