@@ -34,6 +34,9 @@ const ExamStart = () => {
             <Exam
               exercises={Exams[examOpen].exercises}
               title={Exams[examOpen].title}
+              onEnd={(correctCounter: number) => {
+                return <h1>Correct Answers: {correctCounter}</h1>;
+              }}
             />
           )}
         </div>

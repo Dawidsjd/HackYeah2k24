@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import TradingViewWidget from './TradingViewWidget';
+import TradingViewWidget from '../TradingViewWidget';
 import { FiPlus } from 'react-icons/fi';
 import { ArrowUpCircle, ArrowDownCircle, ArrowDownUp } from 'lucide-react';
 import { motion } from 'framer-motion';
-import Navbar from './Navbar/Navbar';
+import Navbar from '../Navbar/Navbar';
 
 interface CryptoDetailsProps {
   onBack: () => void;
@@ -18,6 +18,9 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
   const [usdtLogo, setUsdtLogo] = useState('');
   const [btcPrice, setBtcPrice] = useState(0);
   const [alertVisible, setAlertVisible] = useState(false);
+  
+  // Define the account balance as a state
+  const [accountBalance, setAccountBalance] = useState(1000); // You can also fetch this dynamically if needed
 
   useEffect(() => {
     const fetchLogosAndRate = async () => {
@@ -56,7 +59,7 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
 
   const handleUsdChange = (value: string) => {
     const usdValue = parseFloat(value);
-    if (usdValue >= 0) {
+    if (usdValue >= 0 && usdValue <= accountBalance) {
       setUsdAmount(value);
       if (!isNaN(usdValue) && btcPrice > 0) {
         const btcValue = usdValue / btcPrice;
@@ -76,7 +79,12 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
       setBtcAmount(value);
       if (!isNaN(btcValue) && btcPrice > 0) {
         const usdValue = btcValue * btcPrice;
-        setUsdAmount(usdValue.toFixed(2));
+        // Check against account balance
+        if (usdValue <= accountBalance) {
+          setUsdAmount(usdValue.toFixed(2));
+        } else {
+          setUsdAmount('');
+        }
       } else {
         setUsdAmount('');
       }
@@ -88,6 +96,21 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
 
   const handleExchange = () => {
     setAlertVisible(true);
+
+    // Update account balance based on action type
+    if (actionType === 'buy') {
+      const usdValue = parseFloat(usdAmount);
+      if (!isNaN(usdValue)) {
+        setAccountBalance((prevBalance) => prevBalance - usdValue);
+      }
+    } else if (actionType === 'sell') {
+      const btcValue = parseFloat(btcAmount);
+      if (!isNaN(btcValue)) {
+        const usdValue = btcValue * btcPrice;
+        setAccountBalance((prevBalance) => prevBalance + usdValue);
+      }
+    }
+
     setIsModalOpen(false);
     setActionType(null);
     setUsdAmount('');
@@ -108,13 +131,12 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
 
       <Navbar/>
 
-      
       <div className="absolute transform scale-75 top-0 -right-5 w-64 overflow-hidden rounded-lg bg-gray-900 bg-opacity-30 backdrop-blur-md backdrop-filter border border-gray-800">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-transparent opacity-50"></div>
         <div className="relative p-4">
           <h2 className="text-lg font-semibold text-white mb-1">Account Balance</h2>
           <div className="flex items-center justify-between">
-            <span className="text-2xl font-bold text-white">$1000</span>
+            <span className="text-2xl font-bold text-white">${accountBalance}</span>
             <button 
               className="text-white hover:bg-white hover:bg-opacity-10 p-1 rounded"
             >
@@ -203,29 +225,29 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
         </div>
       )}
 
-    {alertVisible && (
-       <motion.div
-       role="alert"
-       initial={{ opacity: 0, x: 100 }}  // Initial state: hidden and off-screen to the right
-       animate={{ opacity: 1, x: 0 }}     // Animate to visible and move to original position
-       exit={{ opacity: 0, x: 100 }}       // Animate back to hidden and move off-screen to the right
-       transition={{ duration: 0.3 }}      // Transition duration
-       className="fixed bottom-4 right-4 w-1/2 z-50 alert alert-success mb-4 shadow-2xl"
-     >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 shrink-0 stroke-current"
-          fill="none"
-          viewBox="0 0 24 24">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span>Your purchase has been confirmed!</span>
-      </motion.div>
-    )}
+      {alertVisible && (
+        <motion.div
+          role="alert"
+          initial={{ opacity: 0, x: 100 }}  // Initial state: hidden and off-screen to the right
+          animate={{ opacity: 1, x: 0 }}     // Animate to visible and move to original position
+          exit={{ opacity: 0, x: 100 }}       // Animate back to hidden and move off-screen to the right
+          transition={{ duration: 0.3 }}      // Transition duration
+          className="fixed bottom-4 right-4 w-1/2 z-50 alert alert-success mb-4 shadow-2xl"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 shrink-0 stroke-current"
+            fill="none"
+            viewBox="0 0 24 24">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>Your purchase has been confirmed!</span>
+        </motion.div>
+      )}
     </div>
   );
 };

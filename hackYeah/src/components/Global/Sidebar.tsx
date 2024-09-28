@@ -71,7 +71,7 @@ const Sidebar = () => {
               }
             >
               <GiTakeMyMoney />
-              <span className="mx-2 text-sm font-medium">Demo Traiding</span>
+              <span className="mx-2 text-sm font-medium">Demo Trading</span>
             </NavLink>
           </div>
         </nav>
