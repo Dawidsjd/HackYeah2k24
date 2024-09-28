@@ -11,14 +11,14 @@ const Traiding = () => {
     setSelectedCrypto(id); // Ustaw ID wybranej kryptowaluty
   };
 
-  const handleCloseDetails = () => {
-    setSelectedCrypto(null); // Resetuj stan po zamknięciu wykresu
+  const handleBack = () => {
+    setSelectedCrypto(null); // Cofnij do galerii
   };
 
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       {selectedCrypto ? (
-        <CryptoDetails id={selectedCrypto} onClose={handleCloseDetails} /> // Wyświetl tylko wykres
+        <CryptoDetails id={selectedCrypto} onBack={handleBack} /> // Wyświetl wykres bez opakowania modalnego
       ) : (
         <>
           <SearchBar />
