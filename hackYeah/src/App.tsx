@@ -6,6 +6,7 @@ import ExamStart from './components/Exams/Home';
 import Traiding from './components/Trading/Trading';
 import Sidebar from './components/Global/Sidebar';
 import KnowledgeTest from './components/Global/KnowledgeTest';
+import Positions from './components/Trading/components/SubPages/Positions';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/course" element={<Course />} />
         <Route path="/exams" element={<ExamStart />} />
         <Route path="/knowledge-test" element={<KnowledgeTest />} />
+        <Route path="/traiding/positions" element={<Positions />} />
         <Route
           path="/traiding"
           element={
