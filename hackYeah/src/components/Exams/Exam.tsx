@@ -1,5 +1,5 @@
-const ExamStart = () => {
+const Exam = () => {
   return;
 };
 
-export default ExamStart;
+export default Exam;
