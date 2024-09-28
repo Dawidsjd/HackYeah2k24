@@ -1,7 +1,8 @@
 import React from 'react';
+import Sidebar from '../Global/Sidebar';
 
 const Exercises = () => {
-  return <div>Exercises</div>;
+  return <Sidebar />;
 };
 
 export default Exercises;
