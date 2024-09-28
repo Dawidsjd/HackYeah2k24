@@ -4,6 +4,7 @@ import { ImBooks } from 'react-icons/im';
 import { FaPencilAlt } from 'react-icons/fa';
 import { GiTakeMyMoney } from 'react-icons/gi';
 import Logo from '../../assets/25c61999-863f-4e6a-b440-da5f296ec0e3.jfif.jpeg';
+import { LuUser2 } from 'react-icons/lu';
 
 const Sidebar = () => {
   return (
@@ -74,6 +75,17 @@ const Sidebar = () => {
             </NavLink>
           </div>
         </nav>
+
+        {/* Settings Link at the Bottom, in the same nav section */}
+        <div className="mt-auto">
+          <NavLink
+            to={'/settings'}
+            className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+          >
+            <LuUser2 />
+            <span className="mx-2 text-sm font-medium">Settings</span>
+          </NavLink>
+        </div>
       </div>
     </aside>
   );

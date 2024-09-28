@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from '../Global/Sidebar';
 import { Exercise } from './Exercise';
+import { ExerciseType } from '../../type';
 
 function shuffle(array: number[]) {
   let currentIndex = array.length;
@@ -15,10 +16,10 @@ function shuffle(array: number[]) {
   }
 }
 
-const Exercises = (exercise:Exercise) => {
+const Exercises = (exercise:ExerciseType) => {
   var order = [ 0, 1, 2, 3 ];
   shuffle(order)
-  var answers = exercise.createQuestionTemplate()
+  var answers = Exercise.createQuestionTemplate(exercise.falseAnswers,exercise.correctAnswer)
   var answersTab = answers.falseAnswers
   answersTab.push(answers.correctAnswer)
   return <>
