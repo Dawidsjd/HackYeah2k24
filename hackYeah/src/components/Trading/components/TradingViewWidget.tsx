@@ -54,7 +54,7 @@ const TradingViewWidget: React.FC = () => {
   }, []);
 
   return (
-    <div className='h-[400px] mt-10'>
+    <div className='h-[500px] mt-10'>
       <div className="tradingview-widget-container" ref={container} style={{ height: "100%", width: "100%" }}>
         <div className="tradingview-widget-container__widget" style={{ height: "calc(100% - 32px)", width: "100%" }}></div>
         <div className="tradingview-widget-copyright">

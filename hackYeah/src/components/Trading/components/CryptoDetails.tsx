@@ -3,6 +3,7 @@ import TradingViewWidget from './TradingViewWidget';
 import { FiPlus } from 'react-icons/fi';
 import { ArrowUpCircle, ArrowDownCircle, ArrowDownUp } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Navbar from './Navbar/Navbar';
 
 interface CryptoDetailsProps {
   onBack: () => void;
@@ -104,6 +105,8 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
       >
         &lt; Back to Coins
       </button>
+
+      <Navbar/>
 
       
       <div className="absolute transform scale-75 top-0 -right-5 w-64 overflow-hidden rounded-lg bg-gray-900 bg-opacity-30 backdrop-blur-md backdrop-filter border border-gray-800">
