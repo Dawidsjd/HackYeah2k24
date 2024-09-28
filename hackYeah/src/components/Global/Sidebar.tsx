@@ -4,14 +4,14 @@ import { ImBooks } from 'react-icons/im';
 import { FaPencilAlt } from 'react-icons/fa';
 import { GiTakeMyMoney } from 'react-icons/gi';
 import { LuUser2 } from 'react-icons/lu';
-import Logo from '../../assets/25c61999-863f-4e6a-b440-da5f296ec0e3.jfif.jpeg';
+import Logo from '/logo.png';
 
 const Sidebar = () => {
   return (
     <aside className="flex flex-col w-1/5 h-screen px-5 py-8 overflow-y-auto bg-primary">
       <NavLink to="/" className="flex items-center space-x-2">
-        <img src={Logo} alt="logo" className="w-8 h-8 rounded-full" />
-        <p className="text-tertiary">Investify</p>
+        <img src={Logo} alt="logo" className="w-20 h-20 rounded-full" /> {/* Adjusted logo size to 80px */}
+        <p className="text-tertiary text-xl font-bold">Investify</p> {/* Adjusted font size and weight */}
       </NavLink>
 
       <div className="flex flex-col justify-between flex-1 mt-6">
