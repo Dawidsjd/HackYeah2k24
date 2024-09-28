@@ -9,7 +9,7 @@ export type CourseType = {
     introduction: String;
     mainArticlePartOne: String;
     mainArticlePartTwo: String;
-    levelOfAdvancement: String;
+    levelOfAdvancement: number;
     linkToArticle: String;
   };
   
