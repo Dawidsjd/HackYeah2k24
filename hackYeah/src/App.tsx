@@ -2,7 +2,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home/Home';
 import Course from './components/Course/Course';
-import Exercises from './components/Exercises/Exercises';
+import ExamStart from './components/Exams/Home';
 import Traiding from './components/Trading/Traiding';
 import Sidebar from './components/Global/Sidebar';
 
@@ -12,7 +12,7 @@ const App = () => {
       <Routes>
         <Route index element={<Home />} />
         <Route path="/course" element={<Course />} />
-        <Route path="/exercises" element={<Exercises />} />
+        <Route path="/exercises" element={<ExamStart />} />
         <Route path="/traiding" element={
           <div className="flex bg-gray-900">
             <div className="fixed h-full w-64">
