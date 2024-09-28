@@ -254,3 +254,15 @@ export const ModuleNineExcercises: ExerciseType[] = [
     ],
   },
 ];
+
+export const FullExcercises: ExerciseType[][] = [
+  ModuleOneExcercises,
+  ModuleTwoExcercises,
+  ModuleThreeExcercises,
+  ModuleFourExcercises,
+  ModuleFiveExcercises,
+  ModuleSixExcercises,
+  ModuleSevenExcercises,
+  ModuleEightExcercises,
+  ModuleNineExcercises,
+];
