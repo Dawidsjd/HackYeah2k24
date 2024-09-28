@@ -2,6 +2,7 @@ import React from 'react';
 import QuickStart from './QuickStart';
 import CheckKnowledge from './CheckKnowledge';
 import CryptoList from './CryptoList';
+import CryptoNews from './CryptoNews';
 const Panel = () => {
   const tileStyle = 'flex rounded-xl shadow-custom-light p-2 ';
   return (
@@ -18,7 +19,9 @@ const Panel = () => {
         <div className={`justify-start w-2/3 ${tileStyle}`}>
           <CryptoList />
         </div>
-        <div className={`justify-end w-1/3 ${tileStyle}`}>right top</div>
+        <div className={`justify-end w-1/3 ${tileStyle}`}>
+          <CryptoNews />
+        </div>
       </div>
     </div>
   );

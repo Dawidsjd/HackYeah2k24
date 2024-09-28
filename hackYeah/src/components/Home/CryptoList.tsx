@@ -23,7 +23,7 @@ const CryptoList: React.FC = () => {
             params: {
               vs_currency: 'usd',
               order: 'market_cap_desc',
-              per_page: 5,
+              per_page: 3,
               page: 1,
               sparkline: false,
             },
@@ -57,7 +57,7 @@ const CryptoList: React.FC = () => {
       {cryptos.map((crypto) => (
         <div
           key={crypto.id}
-          className=" p-2 space-x-4 rounded-md shadow-xl flex flex-row"
+          className=" p-2 space-x-4 rounded-md shadow-xl items-center flex flex-row"
         >
           <img
             src={crypto.image}
