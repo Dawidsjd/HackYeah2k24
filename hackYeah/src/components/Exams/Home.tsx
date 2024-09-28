@@ -41,11 +41,20 @@ const ExamStart = ({ level }: { level: number }) => {
             </span>
           )}
           All Exams:
-          {Exams.map((exam) => (
-            <div>
-              <button onClick={() => setExamOpen(exam.id)}>{exam.title}</button>
-            </div>
-          ))}
+          <div className="flex space-x-2">
+  {Exams.map((exam) => (
+    <span
+      key={exam.id}
+      className="badge badge-white cursor-pointer"
+      onClick={() => setExamOpen(exam.id)}
+    >
+      {exam.title}
+    </span>
+  ))}
+</div>
+
+
+
           {examOpen != null && (
             <Exam
               exercises={Exams[examOpen].exercises}
