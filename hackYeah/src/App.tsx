@@ -6,14 +6,16 @@ import Traiding from './components/Traiding/Traiding';
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="/course" element={<Course />} />
-        <Route path="/exercises" element={<Exercises />} />
-        <Route path="/traiding" element={<Traiding />} />
-      </Routes>
-    </BrowserRouter>
+    // <BrowserRouter>
+    //   <Routes>
+    //     <Route index element={<Home />} />
+    //     <Route path="/course" element={<Course />} />
+    //     <Route path="/exercises" element={<Exercises />} />
+    //     <Route path="/traiding" element={<Traiding />} />
+    //   </Routes>
+    // </BrowserRouter>
+    <Traiding />
+
   );
 };
 
