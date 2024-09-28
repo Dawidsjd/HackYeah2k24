@@ -16,8 +16,8 @@ const Panel = () => {
           step={2}
           title="Do some exercises"
           description="Test your knowledge by doing exercises"
-          buttonName="Exercises"
-          buttonLink="/exercises"
+          buttonName="Exams"
+          buttonLink="/exams"
         />
         <Card
           step={3}
