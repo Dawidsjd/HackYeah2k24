@@ -5,6 +5,7 @@ import Course from './components/Course/Course';
 import ExamStart from './components/Exams/Home';
 import Traiding from './components/Trading/Traiding';
 import Sidebar from './components/Global/Sidebar';
+import KnowledgeTest from './components/Global/KnowledgeTest';
 
 const App = () => {
   return (
@@ -12,7 +13,8 @@ const App = () => {
       <Routes>
         <Route index element={<Home />} />
         <Route path="/course" element={<Course />} />
-        <Route path="/exams" element={<ExamStart />} />        
+        <Route path="/exams" element={<ExamStart />} />
+        <Route path="/knowledge-test" element={<KnowledgeTest />} />
         <Route
           path="/traiding"
           element={
@@ -26,7 +28,8 @@ const App = () => {
                 <Traiding />
               </div>
             </div>
-          } />
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
