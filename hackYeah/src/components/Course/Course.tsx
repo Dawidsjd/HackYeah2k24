@@ -2,7 +2,6 @@ import React from 'react';
 import { courses } from './Courses'; // Import your courses array
 import { CourseType } from '../../type'; // Typing for course objects
 import Sidebar from '../Global/Sidebar';
-import { Link } from 'react-router-dom';
 import CourseCard from './CourseCard';
 
 interface CourseProps {
@@ -17,7 +16,7 @@ const Course: React.FC<CourseProps> = ({ level, setLevel }) => {
       return 'Beginner';
     } else if (level >= 4 && level <= 6) {
       return 'Intermediate';
-    } else {
+    } else if (level >= 7) {
       return 'Expert';
     }
   };
@@ -35,7 +34,10 @@ const Course: React.FC<CourseProps> = ({ level, setLevel }) => {
   return (
     <div className="flex bg-primary">
       <Sidebar />
-      <div className="flex-1 m-4 rounded-sm p-2">
+      <div
+        className="flex-1 m-4 rounded-sm p-2 overflow-y-auto"
+        style={{ maxHeight: '95vh' }}
+      >
         <h1>Courses for {getLevelName(level)}</h1>
 
         {/* Grid layout for filtered courses */}
