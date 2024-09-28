@@ -104,6 +104,7 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
       >
         &lt; Back to Gallery
       </button>
+
       
       <div className="absolute transform scale-75 top-0 -right-5 w-64 overflow-hidden rounded-lg bg-gray-900 bg-opacity-30 backdrop-blur-md backdrop-filter border border-gray-800">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-transparent opacity-50"></div>
@@ -199,30 +200,29 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
         </div>
       )}
 
-{alertVisible && (
-  <motion.div
-    role="alert"
-    initial={{ opacity: 0, x: 100 }}  // Initial state: hidden and off-screen to the right
-    animate={{ opacity: 1, x: 0 }}     // Animate to visible and move to original position
-    exit={{ opacity: 0, x: 100 }}       // Animate back to hidden and move off-screen to the right
-    transition={{ duration: 0.3 }}      // Transition duration
-    className="fixed bottom-4 right-4 w-1/2 z-50 alert alert-success mb-4 shadow-2xl"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-6 w-6 shrink-0 stroke-current"
-      fill="none"
-      viewBox="0 0 24 24">
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-    <span>Your purchase has been confirmed!</span>
-  </motion.div>
-)}
-
+    {alertVisible && (
+       <motion.div
+       role="alert"
+       initial={{ opacity: 0, x: 100 }}  // Initial state: hidden and off-screen to the right
+       animate={{ opacity: 1, x: 0 }}     // Animate to visible and move to original position
+       exit={{ opacity: 0, x: 100 }}       // Animate back to hidden and move off-screen to the right
+       transition={{ duration: 0.3 }}      // Transition duration
+       className="fixed bottom-4 right-4 w-1/2 z-50 alert alert-success mb-4 shadow-2xl"
+     >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 shrink-0 stroke-current"
+          fill="none"
+          viewBox="0 0 24 24">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>Your purchase has been confirmed!</span>
+      </motion.div>
+    )}
     </div>
   );
 };
