@@ -16,9 +16,9 @@ const Traiding = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
+    <div className="min-h-screen bg-[#0F172A] p-4">
       {selectedCrypto ? (
-        <CryptoDetails id={selectedCrypto} onBack={handleBack} /> // Wyświetl wykres bez opakowania modalnego
+        <CryptoDetails onBack={handleBack} /> // Wyświetl wykres bez opakowania modalnego
       ) : (
         <>
           <SearchBar />
