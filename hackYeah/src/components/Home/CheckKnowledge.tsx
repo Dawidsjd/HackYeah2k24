@@ -16,7 +16,7 @@ const CheckKnowledge = () => {
         </p>
       </div>
       {/* Ustawienie marginesu górnego oraz lepszy layout */}
-      <div className="mt-8">
+      <div className="mt-8 flex flex-row items-center justify-between">
         <Link
           to="/knowledge-test"
           className="bg-primary text-additional-second rounded-md px-4 py-2 inline-flex items-center space-x-2"
@@ -24,6 +24,8 @@ const CheckKnowledge = () => {
           <span>Go to test</span>
           <FaLongArrowAltRight />
         </Link>
+        <p className="text-xl font-bold text-primary">Your level: null</p>
+        {/*Do ustawienia Beginner, Basic, Intermediate, Advanced, Expert */}
       </div>
     </div>
   );
