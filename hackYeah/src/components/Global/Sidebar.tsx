@@ -6,7 +6,7 @@ import { GiTakeMyMoney } from 'react-icons/gi';
 
 const Sidebar = () => {
   return (
-    <aside className="flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
+    <aside className="flex flex-col w-1/5 h-screen px-5 py-8 overflow-y-auto bg-gray-900">
       <a href="#">{/* Logo */}</a>
 
       <div className="flex flex-col justify-between flex-1 mt-6">
