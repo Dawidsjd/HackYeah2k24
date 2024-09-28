@@ -2,7 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home/Home';
 import Course from './components/Course/Course';
 import Exercises from './components/Exercises/Exercises';
-import Traiding from './components/Traiding/Traiding';
+import Traiding from './components/Trading/Traiding';
+
 
 const App = () => {
   return (
@@ -14,7 +15,7 @@ const App = () => {
     //     <Route path="/traiding" element={<Traiding />} />
     //   </Routes>
     // </BrowserRouter>
-    <Traiding />
+    <Traiding/>
 
   );
 };

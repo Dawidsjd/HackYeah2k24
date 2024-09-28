@@ -1,7 +1,8 @@
 // CryptoGallery.tsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FiExternalLink } from 'react-icons/fi'; // Import ikony
+import { FiExternalLink } from 'react-icons/fi';
+
 
 interface Crypto {
   id: string;
@@ -12,7 +13,11 @@ interface Crypto {
   market_cap: number;
 }
 
-const CryptoGallery = () => {
+interface CryptoGalleryProps {
+  onCryptoSelect: (id: string) => void; // Prop do przekazywania wybranej kryptowaluty
+}
+
+const CryptoGallery: React.FC<CryptoGalleryProps> = ({ onCryptoSelect }) => {
   const [cryptos, setCryptos] = useState<Crypto[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -48,9 +53,9 @@ const CryptoGallery = () => {
       {cryptos.map((crypto) => (
         <div
           key={crypto.id}
-          className="bg-white p-4 rounded shadow-md flex flex-col items-center border border-gray-200 relative"
+          className="bg-white p-4 rounded shadow-md flex flex-col items-center border border-gray-200 relative cursor-pointer"
+          onClick={() => onCryptoSelect(crypto.id)} // Wywołaj funkcję przekazaną jako prop
         >
-          {/* Ikona przekierowania w prawym górnym rogu */}
           <a
             href={`https://www.coingecko.com/en/coins/${crypto.id}`}
             target="_blank"
@@ -69,6 +74,9 @@ const CryptoGallery = () => {
           <p className="text-gray-500 uppercase">{crypto.symbol}</p>
           <p className="text-green-600 font-semibold mt-2">
             ${crypto.current_price.toLocaleString()}
+          </p>
+          <p className="text-gray-700 mt-1">
+            Market Cap: ${crypto.market_cap.toLocaleString()}
           </p>
         </div>
       ))}
