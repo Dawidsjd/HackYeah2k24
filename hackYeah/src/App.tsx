@@ -4,19 +4,16 @@ import Course from './components/Course/Course';
 import Exercises from './components/Exercises/Exercises';
 import Traiding from './components/Trading/Traiding';
 
-
 const App = () => {
   return (
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route index element={<Home />} />
-    //     <Route path="/course" element={<Course />} />
-    //     <Route path="/exercises" element={<Exercises />} />
-    //     <Route path="/traiding" element={<Traiding />} />
-    //   </Routes>
-    // </BrowserRouter>
-    <Traiding/>
-
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/course" element={<Course />} />
+        <Route path="/exercises" element={<Exercises />} />
+        <Route path="/traiding" element={<Traiding />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

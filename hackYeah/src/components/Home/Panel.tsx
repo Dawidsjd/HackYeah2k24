@@ -1,7 +1,12 @@
 import React from 'react';
+import CryptoList from './CryptoList';
 
 const Panel = () => {
-  return <div className="shadow-custom-light rounded-sm">Panel</div>;
+  return (
+    <div className="mt-4">
+      <CryptoList />
+    </div>
+  );
 };
 
 export default Panel;
