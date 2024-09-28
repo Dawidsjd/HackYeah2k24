@@ -3,7 +3,9 @@ import Card from './Card';
 const Panel = () => {
   return (
     <div className="w-full">
-      <p className="text-lg  text-additional-second">Quick Start</p>
+      <p className="text-xl font-bold text-additional-second mb-2">
+        Quick Start
+      </p>
       <div className="mt-2 flex flex-col">
         <Card
           step={1}

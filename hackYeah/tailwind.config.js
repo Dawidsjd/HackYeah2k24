@@ -12,15 +12,12 @@ module.exports = {
         neutral: '#9E9E9E',
       },
       fontFamily: {
-        sans: ['Demi Sans', 'sans-serif'], // Dodanie czcionki Demi Sans
+        sans: ['Demi Sans', 'sans-serif'],
       },
       boxShadow: {
         'custom-light': '0 0 3px 2px rgba(245, 245, 245, 0.2)',
       },
-      
     },
   },
-  plugins: [
-    require('daisyui'),
-  ],
+  plugins: [require('daisyui')],
 };
