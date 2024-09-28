@@ -1,90 +1,21 @@
 // CryptoDetails.tsx
-import React, { useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  ChartData,
-} from 'chart.js';
-
-// Rejestrujemy elementy Chart.js
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+import React from 'react';
+import TradingViewWidget from './TradingViewWidget'; // Upewnij się, że ścieżka jest poprawna
 
 interface CryptoDetailsProps {
-  id: string;
   onBack: () => void; // Dodajemy funkcję do powrotu
 }
 
-const CryptoDetails: React.FC<CryptoDetailsProps> = ({ id, onBack }) => {
-  const [chartData, setChartData] = useState<ChartData<'line'> | undefined>(); // Uwzględnienie undefined
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchMarketData = async () => {
-      try {
-        const response = await fetch(
-          `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=7`
-        );
-        
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-        const prices = data.prices;
-        const labels = prices.map((price: number[]) =>
-          new Date(price[0]).toLocaleDateString()
-        );
-        const priceData = prices.map((price: number[]) => price[1]);
-
-        setChartData({
-          labels,
-          datasets: [
-            {
-              label: 'Price (USD)',
-              data: priceData,
-              borderColor: 'rgba(75, 192, 192, 1)',
-              backgroundColor: 'rgba(75, 192, 192, 0.2)',
-              fill: true,
-            },
-          ],
-        });
-
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching market data:', error);
-      }
-    };
-
-    fetchMarketData();
-  }, [id]);
-
-  if (loading) return <div className="text-center">Loading chart...</div>;
-
+const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
   return (
-    <div className="p-4"> {/* Użyj normalnego opakowania dla wykresu */}
+    <div className="p-4">
       <button
         onClick={onBack} // Przyciski do cofania
         className="mb-4 text-blue-500 hover:underline"
       >
         &lt; Back to Gallery
       </button>
-      <h2 className="text-xl font-bold mb-4">Price Chart - Last 7 Days</h2>
-      {chartData && <Line data={chartData} />} {/* Sprawdzamy, czy chartData jest dostępne */}
+      <TradingViewWidget /> {/* Wstawienie komponentu TradingViewWidget */}
     </div>
   );
 };
