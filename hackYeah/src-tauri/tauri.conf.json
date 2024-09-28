@@ -56,10 +56,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
+        "height": 800,
         "resizable": false,
         "title": "hackyeah",
-        "width": 1000
+        "width": 1200
       }
     ]
   }

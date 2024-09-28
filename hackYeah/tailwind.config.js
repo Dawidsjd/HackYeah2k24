@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#14213D',
+        primary: '#111827',
         secondary: '#FCA311',
         tertiary: '#E5E5E5',
         'additional-first': '#000000',
@@ -17,7 +17,10 @@ module.exports = {
       boxShadow: {
         'custom-light': '0 0 3px 2px rgba(245, 245, 245, 0.2)',
       },
+      
     },
   },
-  plugins: [],
+  plugins: [
+    require('daisyui'),
+  ],
 };

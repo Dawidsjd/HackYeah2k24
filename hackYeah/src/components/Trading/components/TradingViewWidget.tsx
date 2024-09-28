@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, memo } from 'react';
 
 const TradingViewWidget: React.FC = () => {
-  // Ustal typ referencji jako HTMLDivElement
   const container = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -22,31 +21,48 @@ const TradingViewWidget: React.FC = () => {
         "hide_side_toolbar": false,
         "allow_symbol_change": true,
         "calendar": false,
-        "support_host": "https://www.tradingview.com"
+        "support_host": "https://www.tradingview.com",
+        "supports_marks": true,
+        "marks": [
+          {
+            "time": 1672377600,
+            "label": "Important event",
+            "color": "#FF0000",
+            "shape": "arrow_down",
+            "text": "BTC Halving"
+          }
+        ],
+        "timescale_marks": [
+          {
+            "time": 1672377600,
+            "label": "Milestone",
+            "shape": "arrow_up",
+            "color": "#00FF00"
+          }
+        ]
       }`;
 
-    // Upewnij się, że container.current jest zdefiniowane
     if (container.current) {
       container.current.appendChild(script);
     }
 
     return () => {
       if (container.current) {
-        container.current.innerHTML = ''; // Usuń skrypt, aby uniknąć powielania
+        container.current.innerHTML = '';
       }
     };
   }, []);
 
   return (
     <div className='h-[400px] mt-10'>
-    <div className="tradingview-widget-container" ref={container} style={{ height: "100%", width: "100%" }}>
-      <div className="tradingview-widget-container__widget" style={{ height: "calc(100% - 32px)", width: "100%" }}></div>
-      <div className="tradingview-widget-copyright">
-        <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
-          <span className="blue-text">Track all markets on TradingView</span>
-        </a>
+      <div className="tradingview-widget-container" ref={container} style={{ height: "100%", width: "100%" }}>
+        <div className="tradingview-widget-container__widget" style={{ height: "calc(100% - 32px)", width: "100%" }}></div>
+        <div className="tradingview-widget-copyright">
+          <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
+            <span className="blue-text">Track all markets on TradingView</span>
+          </a>
+        </div>
       </div>
-    </div>
     </div>
   );
 };

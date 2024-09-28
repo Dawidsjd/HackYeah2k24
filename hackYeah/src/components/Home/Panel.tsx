@@ -1,31 +1,24 @@
 import React from 'react';
-import Card from './Card';
+import QuickStart from './QuickStart';
+import CheckKnowledge from './CheckKnowledge';
+import CryptoList from './CryptoList';
 const Panel = () => {
+  const tileStyle = 'flex rounded-xl shadow-custom-light p-2 ';
   return (
-    <div>
-      <p className="text-lg  mt-4 text-additional-second">Quick Start</p>
-      <div className="mt-2 flex flex-row space-x-2">
-        <Card
-          step={1}
-          title="Learn from courses"
-          description="Learn the basics by doing courses"
-          buttonName="Courses"
-          buttonLink="/course"
-        />
-        <Card
-          step={2}
-          title="Do some exercises"
-          description="Test your knowledge by doing exercises"
-          buttonName="Exams"
-          buttonLink="/exams"
-        />
-        <Card
-          step={3}
-          title="Try demo trading"
-          description="First thing you have  to do is make some courses"
-          buttonName="Demo Traiding"
-          buttonLink="/traiding"
-        />
+    <div className="flex flex-col w-full mt-2 space-y-4">
+      <div className="flex space-x-4">
+        <div className={`justify-start w-1/2 bg-secondary ${tileStyle}`}>
+          <CheckKnowledge />
+        </div>
+        <div className={`justify-end  w-1/2 ${tileStyle}`}>
+          <QuickStart />
+        </div>
+      </div>
+      <div className="flex space-x-4 mt-2">
+        <div className={`justify-start w-2/3 ${tileStyle}`}>
+          <CryptoList />
+        </div>
+        <div className={`justify-end w-1/3 ${tileStyle}`}>right top</div>
       </div>
     </div>
   );
