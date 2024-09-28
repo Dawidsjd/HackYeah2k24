@@ -1,13 +1,6 @@
-type CourseType = {
-  id: number;
-  title: String;
-  introduction: String;
-  mainArticlePartOne: String;
-  mainArticlePartTwo: String;
-  levelOfAdvancement: String;
-  linkToArticle: String;
-};
-let egg = {
+import { CourseType } from "../../type";
+
+let courses:CourseType[] = [{
   id: 1,
   title: "Kurs 1",
   introduction: "Super kurs",
@@ -15,4 +8,4 @@ let egg = {
   mainArticlePartTwo: "fawpkpkfpow opwk aop",
   levelOfAdvancement: "begginer",
   linkToArticle: "geg",
-};
+}];
