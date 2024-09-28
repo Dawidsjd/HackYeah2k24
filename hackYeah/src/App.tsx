@@ -1,12 +1,13 @@
 // App.tsx
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./components/Home/Home";
-import Course from "./components/Course/Course";
-import ExamStart from "./components/Exams/Home";
-import Traiding from "./components/Trading/Trading";
-import Sidebar from "./components/Global/Sidebar";
-import KnowledgeTest from "./components/Global/KnowledgeTest";
-import { useState } from "react";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './components/Home/Home';
+import Course from './components/Course/Course';
+import ExamStart from './components/Exams/Home';
+import Traiding from './components/Trading/Trading';
+import Sidebar from './components/Global/Sidebar';
+import KnowledgeTest from './components/Global/KnowledgeTest';
+import Positions from './components/Trading/components/SubPages/Positions';
+import { useState } from 'react';
 
 const App = () => {
   const [level, setLevel] = useState(-1);
@@ -16,10 +17,8 @@ const App = () => {
         <Route index element={<Home level={level} />} />
         <Route path="/course" element={<Course />} />
         <Route path="/exams" element={<ExamStart />} />
-        <Route
-          path="/knowledge-test"
-          element={<KnowledgeTest setLevel={setLevel} />}
-        />
+        <Route path="/knowledge-test" element={<KnowledgeTest setLevel={setLevel} />} />
+        <Route path="/traiding/positions" element={<Positions />} />
         <Route
           path="/traiding"
           element={
