@@ -15,7 +15,10 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route index element={<Home level={level} />} />
-        <Route path="/course" element={<Course />} />
+        <Route
+          path="/course"
+          element={<Course level={level} setLevel={setLevel} />}
+        />
         <Route path="/exams" element={<ExamStart level={level} />} />
         <Route
           path="/knowledge-test"
