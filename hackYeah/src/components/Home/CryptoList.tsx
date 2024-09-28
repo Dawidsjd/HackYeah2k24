@@ -57,7 +57,7 @@ const CryptoList: React.FC = () => {
       {cryptos.map((crypto) => (
         <div
           key={crypto.id}
-          className=" p-2 space-x-4 rounded-md shadow-xl flex flex-row"
+          className=" p-2 space-x-4 rounded-md shadow-xl items-center flex flex-row"
         >
           <img
             src={crypto.image}
