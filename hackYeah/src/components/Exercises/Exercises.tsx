@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"; // Importuj useState i useEffect
+import { useState } from "react"; // Importuj useState
 import { Exercise } from "./Exercise";
 import { ExerciseProps } from "../../type";
 
@@ -18,11 +18,13 @@ export function shuffle(array: any[]) {
 
 const Exercises = (props: ExerciseProps) => {
   const [imageSrc, setImageSrc] = useState("/wombat-neutral.png"); // Stan dla źródła obrazka
-  var order = [0, 1, 2, 3];
+  const [answersVisible, setAnswersVisible] = useState(true); // Stan do kontrolowania widoczności odpowiedzi
+  const [questionVisible, setQuestionVisible] = useState(true); // Stan do kontrolowania widoczności pytania
+  const order = [0, 1, 2, 3];
   shuffle(order);
   const exercise = new Exercise(props.exercise);
-  var answers = exercise.createQuestionTemplate();
-  var answersTab: { correct: boolean; answer: string }[] = [];
+  const answers = exercise.createQuestionTemplate();
+  const answersTab: { correct: boolean; answer: string }[] = [];
   answers.falseAnswers.forEach((answer) =>
     answersTab.push({ correct: false, answer })
   );
@@ -32,10 +34,16 @@ const Exercises = (props: ExerciseProps) => {
     // Ustaw obrazek w zależności od poprawności odpowiedzi
     setImageSrc(isCorrect ? "/wombat-like.png" : "/wombat-dislike.png");
 
-    // Po 1.5 sekundy przywróć obrazek do neutralnego
+    // Ukryj pytanie i odpowiedzi
+    setAnswersVisible(false);
+    setQuestionVisible(false);
+
+    // Po 1.5 sekundy przywróć obrazek do neutralnego i wyświetl pytanie oraz odpowiedzi
     setTimeout(() => {
       setImageSrc("/wombat-neutral.png");
       props.onAnswer(isCorrect); // Wywołaj callback z odpowiedzią
+      setAnswersVisible(true); // Przywróć widoczność odpowiedzi
+      setQuestionVisible(true); // Przywróć widoczność pytania
     }, 1500);
   };
 
@@ -43,18 +51,21 @@ const Exercises = (props: ExerciseProps) => {
     <div style={{ color: "white" }}>
       <div className="p-4 bg-gray-800 rounded-md shadow-lg">
         {/* Dodanie zdjęcia nad pytaniem */}
-        <img src={imageSrc} alt="Wombat" className="mx-auto mb-4 w-64 h-64" />
-        <div className="font-bold text-lg mb-2 text-center">{props.exercise.question}</div>
+        <img src={imageSrc} alt="Wombat" className="mx-auto mb-4 w-64 h-64 drop-shadow-2xl" />
+        {questionVisible && (
+          <div className="font-bold text-lg mb-2 text-center">{props.exercise.question}</div>
+        )}
         <div className="space-y-2">
-          {order.map((num) => (
-            <div
-              key={num}
-              onClick={() => handleAnswer(answersTab[num].correct)} // Użyj nowej funkcji handleAnswer
-              className="cursor-pointer p-2 rounded-md transition-colors duration-300 hover:bg-gray-700"
-            >
-              {answersTab[num].answer}
-            </div>
-          ))}
+          {answersVisible &&
+            order.map((num) => (
+              <div
+                key={num}
+                onClick={() => handleAnswer(answersTab[num].correct)} // Użyj nowej funkcji handleAnswer
+                className="cursor-pointer p-2 rounded-md transition-colors duration-300 hover:bg-gray-700"
+              >
+                {answersTab[num].answer}
+              </div>
+            ))}
         </div>
       </div>
     </div>
