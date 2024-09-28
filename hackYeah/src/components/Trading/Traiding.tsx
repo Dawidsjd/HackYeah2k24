@@ -21,6 +21,7 @@ const Traiding = () => {
         <CryptoDetails onBack={handleBack} /> // Wyświetl wykres bez opakowania modalnego
       ) : (
         <>
+        
           <SearchBar />
           <div className="p-4">
             <CryptoGallery onCryptoSelect={handleCryptoSelect} /> {/* Przekaż funkcję do CryptoGallery */}

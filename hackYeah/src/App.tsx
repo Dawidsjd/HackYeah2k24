@@ -19,10 +19,10 @@ const App = () => {
           path="/traiding"
           element={
             <div className="flex bg-gray-900 w-full">
-              <div className="fixed h-full w-[64rem]">
+              <div className="fixed h-full" style={{ width: 'inherit' }}>
                 <Sidebar />
               </div>
-              <div className="flex-1 ml-64 overflow-auto z-10">
+              <div className="flex-1 ml-48 overflow-auto">
                 {' '}
                 {/* Ustaw margines dla kontenera */}
                 <Traiding />
