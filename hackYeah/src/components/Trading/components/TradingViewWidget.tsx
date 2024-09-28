@@ -14,7 +14,7 @@ const TradingViewWidget: React.FC = () => {
       {
         "symbols": [
           [
-            "MARKETSCOM:BITCOIN|1D"
+            "MARKETSCOM:ETHEREUM|1D"
           ]
         ],
         "chartOnly": false,
@@ -43,7 +43,6 @@ const TradingViewWidget: React.FC = () => {
         "lineWidth": 2,
         "lineType": 0,
         "dateRanges": [
-          "1d|1",
           "1m|30",
           "3m|60",
           "12m|1D",

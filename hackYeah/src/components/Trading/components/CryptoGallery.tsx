@@ -48,9 +48,22 @@ const CryptoGallery: React.FC<CryptoGalleryProps> = ({ onCryptoSelect }) => {
       {cryptos.map((crypto) => (
         <div
           key={crypto.id}
-          className="bg-white p-4 rounded shadow-md flex flex-col items-center border border-gray-200 relative cursor-pointer"
-          onClick={() => onCryptoSelect(crypto.id)} // Wywołaj funkcję przekazaną jako prop
+          className="relative w-54 h-52 overflow-hidden rounded-xl bg-gray-900 bg-opacity-30 backdrop-blur-md backdrop-filter border border-gray-800 flex flex-col items-center justify-center cursor-pointer p-4" // Added padding for spacing inside the card
+          onClick={() => onCryptoSelect(crypto.id)}
         >
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-transparent opacity-50"></div>
+          <div className="relative flex flex-col items-center justify-center h-full space-y-2"> {/* Reduced space-y for less spacing */}
+            <img
+              src={crypto.image}
+              alt={crypto.name}
+              className="w-14 h-14 mb-2" // Removed the wrapper div for logo
+            />
+            <h2 className="text-2xl font-bold text-white text-center">{crypto.name}</h2>
+            <p className="text-gray-500 uppercase">{crypto.symbol}</p>
+            <p className="text-green-600 font-semibold mt-1"> {/* Reduced mt for less spacing */}
+              ${crypto.current_price.toLocaleString()}
+            </p>
+          </div>
           <a
             href={`https://www.coingecko.com/en/coins/${crypto.id}`}
             target="_blank"
@@ -59,20 +72,6 @@ const CryptoGallery: React.FC<CryptoGalleryProps> = ({ onCryptoSelect }) => {
           >
             <FiExternalLink size={20} />
           </a>
-
-          <img
-            src={crypto.image}
-            alt={crypto.name}
-            className="w-16 h-16 mb-4"
-          />
-          <h2 className="text-lg font-bold">{crypto.name}</h2>
-          <p className="text-gray-500 uppercase">{crypto.symbol}</p>
-          <p className="text-green-600 font-semibold mt-2">
-            ${crypto.current_price.toLocaleString()}
-          </p>
-          <p className="text-gray-700 mt-1">
-            Market Cap: ${crypto.market_cap.toLocaleString()}
-          </p>
         </div>
       ))}
     </div>
