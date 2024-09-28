@@ -18,7 +18,7 @@ const App = () => {
             <div className="fixed h-full w-[64rem]">
               <Sidebar />
             </div>
-            <div className="flex-1 ml-64 m-4 overflow-auto z-10"> {/* Ustaw margines dla kontenera */}
+            <div className="flex-1 ml-64 overflow-auto z-10"> {/* Ustaw margines dla kontenera */}
               <Traiding />
             </div>
           </div>
