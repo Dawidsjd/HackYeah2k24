@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home/Home';
 import Course from './components/Course/Course';
 import ExamStart from './components/Exams/Home';
-import Traiding from './components/Trading/Traiding';
+import Traiding from './components/Trading/Trading';
 import Sidebar from './components/Global/Sidebar';
 import KnowledgeTest from './components/Global/KnowledgeTest';
 
