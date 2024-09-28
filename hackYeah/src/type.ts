@@ -18,6 +18,7 @@ export type ExamType = {
 export type ExamProps = {
   exercises: ExerciseType[];
   title: string;
+  onEnd: any;
 };
 
 export type CourseType = {

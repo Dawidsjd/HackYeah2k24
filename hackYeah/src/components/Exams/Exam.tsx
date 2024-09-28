@@ -18,9 +18,7 @@ const Exam = (props: ExamProps) => {
       {questionNr < exercises.length && (
         <Exercises exercise={exercises[questionNr]} onAnswer={onAnswer} />
       )}
-      {questionNr == exercises.length && (
-        <div>Correct Answers: {correctCounter}</div>
-      )}
+      {questionNr == exercises.length && props.onEnd(correctCounter)}
     </div>
   );
 };
