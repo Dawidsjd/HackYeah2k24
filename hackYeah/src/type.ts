@@ -13,3 +13,13 @@ export type ExerciseProps = {
   exercise: ExerciseType;
   onAnswer: Function;
 };
+
+export type CourseType = {
+  id: number;
+  title: String;
+  introduction: String;
+  mainArticlePartOne: String;
+  mainArticlePartTwo: String;
+  levelOfAdvancement: number;
+  linkToArticle: String;
+};
