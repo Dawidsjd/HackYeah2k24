@@ -12,7 +12,7 @@ const App = () => {
       <Routes>
         <Route index element={<Home />} />
         <Route path="/course" element={<Course />} />
-        <Route path="/exercises" element={<ExamStart />} />
+        <Route path="/exams" element={<ExamStart />} />
         <Route path="/traiding" element={
           <div className="flex bg-gray-900 w-full">
             <div className="fixed h-full w-[64rem]">
