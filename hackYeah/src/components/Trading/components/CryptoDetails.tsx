@@ -97,12 +97,12 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
   };
 
   return (
-    <div className="relative p-4">
+    <div className="relative p-4 ml-[30px]">
       <button
         onClick={onBack}
         className="mb-4 text-blue-500 hover:underline"
       >
-        &lt; Back to Gallery
+        &lt; Back to Coins
       </button>
 
       

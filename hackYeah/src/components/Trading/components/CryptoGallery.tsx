@@ -23,7 +23,7 @@ const CryptoGallery: React.FC<CryptoGalleryProps> = ({ onCryptoSelect }) => {
     const fetchCryptos = async () => {
       try {
         const response = await fetch(
-          'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false'
+          'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=13&page=1&sparkline=false'
         );
 
         if (!response.ok) {
@@ -44,7 +44,7 @@ const CryptoGallery: React.FC<CryptoGalleryProps> = ({ onCryptoSelect }) => {
   if (loading) return <div className="text-center">Loading...</div>;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ml-[20px] gap-4 p-4">
       {cryptos.map((crypto) => (
         <div
           key={crypto.id}
