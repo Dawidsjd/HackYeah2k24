@@ -1,8 +1,6 @@
 // CryptoGallery.tsx
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { FiExternalLink } from 'react-icons/fi';
-
 
 interface Crypto {
   id: string;
@@ -24,19 +22,16 @@ const CryptoGallery: React.FC<CryptoGalleryProps> = ({ onCryptoSelect }) => {
   useEffect(() => {
     const fetchCryptos = async () => {
       try {
-        const response = await axios.get(
-          'https://api.coingecko.com/api/v3/coins/markets',
-          {
-            params: {
-              vs_currency: 'usd',
-              order: 'market_cap_desc',
-              per_page: 10,
-              page: 1,
-              sparkline: false,
-            },
-          }
+        const response = await fetch(
+          'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false'
         );
-        setCryptos(response.data);
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        setCryptos(data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching cryptocurrency data:', error);
