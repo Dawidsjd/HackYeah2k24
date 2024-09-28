@@ -1,6 +1,5 @@
 // CryptoDetails.tsx
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -37,28 +36,27 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ id, onBack }) => {
   useEffect(() => {
     const fetchMarketData = async () => {
       try {
-        const response = await axios.get(
-          `https://api.coingecko.com/api/v3/coins/${id}/market_chart`,
-          {
-            params: {
-              vs_currency: 'usd',
-              days: 7, // Pobieranie danych z ostatnich 7 dni
-            },
-          }
+        const response = await fetch(
+          `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=7`
         );
+        
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
 
-        const prices = response.data.prices;
+        const data = await response.json();
+        const prices = data.prices;
         const labels = prices.map((price: number[]) =>
           new Date(price[0]).toLocaleDateString()
         );
-        const data = prices.map((price: number[]) => price[1]);
+        const priceData = prices.map((price: number[]) => price[1]);
 
         setChartData({
           labels,
           datasets: [
             {
               label: 'Price (USD)',
-              data,
+              data: priceData,
               borderColor: 'rgba(75, 192, 192, 1)',
               backgroundColor: 'rgba(75, 192, 192, 0.2)',
               fill: true,
