@@ -56,11 +56,11 @@ const ExamStart = ({ level }: { level: number }) => {
       <div style={styles.container} className="bg-primary">
         <Sidebar />
         <div className="flex-1 m-4 rounded-sm p-2">
-          Exam Recomennded to Pass into next level:
+          <p className="mb-2">Exam Recomennded to Pass into next level:</p>
           {recommendId < 3 ? (
             <div>
               <span
-                className="badge badge-white cursor-pointer"
+                className="badge p-4 mb-2 badge-accent cursor-pointer"
                 onClick={() => openExam(Exams[recommendId].id)}
               >
                 {Exams[recommendId].title}
@@ -71,12 +71,12 @@ const ExamStart = ({ level }: { level: number }) => {
               You have reached maximum level of knowledge that we provide
             </span>
           )}
-          All Exams:
+          <p className="mb-2">All Exams:</p>
           <div className="flex space-x-2">
             {Exams.map((exam) => (
               <span
                 key={exam.id}
-                className="badge badge-white cursor-pointer"
+                className="badge p-4 mb-5 badge-white cursor-pointer"
                 onClick={() => openExam(exam.id)}
               >
                 {exam.title}
