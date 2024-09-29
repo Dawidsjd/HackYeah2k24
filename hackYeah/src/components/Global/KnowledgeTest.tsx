@@ -1,8 +1,8 @@
-import { FullExcercises } from '../Exercises/CoursesExcercises';
-import Exam from '../Exams/Exam';
-import { ExerciseType } from '../../type';
-import { Link } from 'react-router-dom';
-import { shuffle } from '../Exercises/Exercises';
+import { FullExcercises } from "../Exercises/CoursesExcercises";
+import Exam from "../Exams/Exam";
+import { ExerciseType } from "../../type";
+import { Link } from "react-router-dom";
+import { shuffle } from "../Exercises/Exercises";
 
 interface KnowledgeTestProps {
   setLevel: (level: number) => void; // Specify the type for setLevel
@@ -21,7 +21,12 @@ const KnowledgeTest: React.FC<KnowledgeTestProps> = ({ setLevel }) => {
       <Exam
         exercises={questions}
         title="Knowledge Exam"
-        onEnd={(correctCounter: number) => {
+        knowledgeTest={true}
+        onEnd={(
+          correctCounter: number,
+          setCounter: any,
+          setQuestionNr: any
+        ) => {
           setLevel(correctCounter);
 
           return (
@@ -30,7 +35,7 @@ const KnowledgeTest: React.FC<KnowledgeTestProps> = ({ setLevel }) => {
                 Correct Answers: {correctCounter}
               </span>
               <Link
-                to={'/'}
+                to={"/"}
                 className="inline-flex items-center space-x-2 px-3 py-1 mt-6 bg-secondary text-additional-second rounded-md hover:bg-additional-second hover:text-primary transition-all"
               >
                 Back to Home
