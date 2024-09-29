@@ -50,19 +50,28 @@ const Exercises = (props: ExerciseProps) => {
 
   return (
     <div className="flex justify-center w-full items-center h-full">
-      <div className="mockup-window  w-full h-[70vh] bg-gray-950 p-4">
-        <div className="flex flex-col bg-gray-900 h-full rounded-lg">
-          {/* Dodanie zdjęcia nad pytaniem */}
-          <img
-            src={imageSrc}
-            alt="Wombat"
-            className={`mx-auto mb-4 w-64 h-64 drop-shadow-custom transition-all duration-300 ${
-              !answersVisible ? 'mt-20' : ''
-            }`}
-          />
-          {questionVisible && (
-            <div className="font-bold text-lg mb-2 text-center text-white">
-              {props.exercise.question}
+  <div className="mockup-window drop-shadow-custom-mockup  w-full h-[70vh] bg-gray-950 p-4">
+    <div className="flex flex-col bg-gray-900 h-full rounded-lg">
+      {/* Dodanie zdjęcia nad pytaniem */}
+      <img
+  src={imageSrc}
+  alt="Wombat"
+  className={`mx-auto mb-4 w-64 h-64 drop-shadow-custom transition-all duration-300 ${
+    !answersVisible ? "mt-20" : ""
+  }`}
+/>
+      {questionVisible && (
+        <div className="font-bold text-lg mb-2 text-center text-white">{props.exercise.question}</div>
+      )}
+      <div className="space-y-2">
+        {answersVisible &&
+          order.map((num) => (
+            <div
+              key={num}
+              onClick={() => handleAnswer(answersTab[num].correct)} // Użyj nowej funkcji handleAnswer
+              className="cursor-pointer p-2 rounded-md transition-colors duration-300 hover:bg-gray-700"
+            >
+              {answersTab[num].answer}
             </div>
           )}
           <div className="space-y-2">
