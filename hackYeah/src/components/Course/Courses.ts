@@ -1,8 +1,18 @@
 import { CourseType } from '../../type';
+import Kurs1 from '../../assets/kurs-1.png';
+import Kurs2 from '../../assets/kurs-2.png';
+import Kurs3 from '../../assets/kurs-3.png';
+import Kurs4 from '../../assets/kurs-4.png';
+import Kurs5 from '../../assets/kurs-5.png';
+import Kurs6 from '../../assets/kurs-6.png';
+import Kurs7 from '../../assets/kurs-7.png';
+import Kurs8 from '../../assets/kurs-8.png';
+import Kurs9 from '../../assets/kurs-9.png';
 
 export let courses: CourseType[] = [
   {
     id: 1,
+    image: Kurs1,
     title: 'What Are Cryptocurrencies?',
     introduction:
       'Cryptocurrencies are a form of digital or virtual currency that relies on cryptography for security. Unlike traditional currencies issued by governments, such as the U.S. dollar or the euro, cryptocurrencies are decentralized and operate on technology known as blockchain.',
@@ -14,6 +24,7 @@ export let courses: CourseType[] = [
   },
   {
     id: 2,
+    image: Kurs2,
     title: 'How Do Cryptocurrencies Work?',
     introduction:
       'Cryptocurrencies are digital assets that rely on cryptographic techniques to ensure secure transactions and control the creation of new units. Unlike traditional currencies that are issued and regulated by governments or central banks, cryptocurrencies are decentralized, meaning they operate on a peer-to-peer network using blockchain technology.',
@@ -25,6 +36,7 @@ export let courses: CourseType[] = [
   },
   {
     id: 3,
+    image: Kurs3,
     title: 'Choosing a Wallet and Exchange',
     introduction:
       'Selecting the right wallet and exchange is crucial for managing your cryptocurrencies effectively. A cryptocurrency wallet allows you to store, send, and receive digital assets, though it doesn’t actually hold the coins. There are two main types of wallets: hot wallets and cold wallets.',
@@ -37,6 +49,7 @@ export let courses: CourseType[] = [
 
   {
     id: 4,
+    image: Kurs4,
     title: 'Basic Investment Principles',
     introduction:
       "Investing is a vital aspect of personal finance, essential for building wealth over time. Before diving into investments, it's crucial to establish clear financial goals, such as saving for retirement, a home, or education.",
@@ -48,6 +61,7 @@ export let courses: CourseType[] = [
   },
   {
     id: 5,
+    image: Kurs5,
     title: 'Practical Approaches to Investing',
     introduction:
       'Investing can seem daunting, but adopting practical approaches can simplify the process and enhance your chances of success. One effective method is to establish clear financial goals, which helps guide your investment decisions. ',
@@ -59,6 +73,7 @@ export let courses: CourseType[] = [
   },
   {
     id: 6,
+    image: Kurs6,
     title: 'Investments and Security',
     introduction:
       'Investments are a key component of wealth-building and financial planning, but they also come with inherent risks. Understanding the relationship between investments and security is crucial for safeguarding your assets and achieving your financial goals.',
@@ -70,6 +85,7 @@ export let courses: CourseType[] = [
   },
   {
     id: 7,
+    image: Kurs7,
     title: 'The Future of Cryptocurrency Investing',
     introduction:
       'The future of cryptocurrency investing holds immense potential, driven by technological advancements, growing adoption, and increasing institutional interest',
@@ -81,6 +97,7 @@ export let courses: CourseType[] = [
   },
   {
     id: 8,
+    image: Kurs8,
     title: 'Investment Strategy',
     introduction:
       'An investment strategy is a plan designed to help an individual or organization achieve specific financial goals through the careful allocation of assets.',
@@ -92,6 +109,7 @@ export let courses: CourseType[] = [
   },
   {
     id: 9,
+    image: Kurs9,
     title: 'Ethics and Responsible Investing',
     introduction:
       'Ethics and responsible investing have gained significant traction in recent years, reflecting a growing awareness among investors about the social, environmental, and governance (ESG) impacts of their financial decisions.',

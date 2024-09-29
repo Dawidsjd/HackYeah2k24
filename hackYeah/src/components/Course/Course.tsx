@@ -53,6 +53,7 @@ const Course: React.FC<CourseProps> = ({ level, setLevel }) => {
                 <CourseCard
                   key={course.id} // Add a key prop for unique identification
                   id={course.id}
+                  image={course.image}
                   levelOfAdvancement={getLevelName(course.levelOfAdvancement)} // Correct usage here
                   title={course.title}
                 />
@@ -70,6 +71,7 @@ const Course: React.FC<CourseProps> = ({ level, setLevel }) => {
             <CourseCard
               key={course.id} // Add a key prop for unique identification
               id={course.id}
+              image={course.image}
               levelOfAdvancement={getLevelName(course.levelOfAdvancement)} // Use correct course level
               title={course.title}
             />
