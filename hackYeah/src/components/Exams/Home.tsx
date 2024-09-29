@@ -2,6 +2,7 @@ import { useState } from "react";
 import Sidebar from "../Global/Sidebar";
 import { Exams } from "./Exams";
 import Exam from "./Exam";
+import '../Exercises/styles.css'
 
 const styles = {
   container: {
@@ -80,11 +81,11 @@ const ExamStart = ({ level }: { level: number }) => {
         {/* Wyświetlanie wyniku po zakończeniu egzaminu */}
         {totalAnswers > 0 && (
   <div className="flex flex-col items-center mt-4">
-    <h1 style={{ color: correctAnswers > totalAnswers / 2 ? "green" : "red" }}>
+    <h1 className="text-2xl drop-shadow-custom" style={{ color: correctAnswers > totalAnswers / 2 ? "green" : "red" }}>
       Correct Answers: {correctAnswers} / {totalAnswers}
     </h1>
     {/* Wyświetlanie zdjęcia w zależności od poprawności odpowiedzi */}
-    <img src={imageSrc} alt="Wombat" className="mx-auto w-64 h-64" />
+    <img src={imageSrc} alt="Wombat" className="mx-auto w-64 h-64 drop-shadow-custom" />
   </div>
 )}
 
