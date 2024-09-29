@@ -19,13 +19,13 @@ const Course: React.FC<CourseProps> = ({ level, setLevel }) => {
     } else if (level == 3) {
       return "Expert";
     }
-    return "Unknown"; // Default case
+    return "No Level"; // Default case
   };
 
   const getUserLevelName = (level: number): string => {
-    if (level >= 0) return "beginner";
-    if (level > 3) return "intermediate";
-    if (level > 6) return "expert";
+    if (level >= 0) return "Beginner";
+    if (level > 3) return "Intermediate";
+    if (level > 6) return "Expert";
     return "No level";
   };
   // Filter courses by the current level
@@ -36,7 +36,8 @@ const Course: React.FC<CourseProps> = ({ level, setLevel }) => {
 
   // Remaining courses not at the selected level
   const otherCourses = courses.filter(
-    (course: CourseType) => course.levelOfAdvancement !== level
+    (course: CourseType) =>
+      getCourseLevelName(course.levelOfAdvancement) !== getUserLevelName(level)
   );
 
   console.log("Filtered Courses:", filteredCourses); // Debugging line
