@@ -16,7 +16,6 @@ const Exam = (props: ExamProps) => {
   };
   return (
     <div>
-      {questionNr}
       {/* <h1 className="">{title}</h1> */}
       {questionNr < exercises.length && (
         <Exercises exercise={exercises[questionNr]} onAnswer={onAnswer} />
