@@ -32,20 +32,34 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ courses }) => {
     <div className="flex bg-primary">
       <Sidebar />
       <div
-        className="flex-1 ml-2 rounded-sm p-2  overflow-y-auto"
+        className="flex-1 ml-2 rounded-sm p-0 overflow-y-auto" // Set padding to 0
         style={{ maxHeight: '95vh', position: 'relative' }}
       >
-        <Link
-          to="/course"
-          className="flex flex-row items-center space-x-2 text-additional-second hover:text-secondary"
-        >
-          <FaArrowLeft />
-          <span>Back</span>
-        </Link>
+        {/* Make the Back link sticky */}
         <div
-          className="rounded-t-md w-full h-1/3 bg-cover bg-center mt-2"
-          style={{ backgroundImage: `url(${course.image})` }}
+          className="sticky top-0 bg-primary z-10 p-2"
+          style={{ marginTop: 0 }}
+        >
+          <Link
+            to="/course"
+            className="flex flex-row items-center space-x-2 text-additional-second hover:text-secondary"
+            style={{ margin: 0, padding: 0 }}
+          >
+            <FaArrowLeft />
+            <span>Back</span>
+          </Link>
+        </div>
+
+        {/* Ensure no margin/padding for the image container */}
+        <div
+          className="rounded-t-md w-full h-1/3 bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${course.image})`,
+            margin: 0,
+            padding: 0,
+          }}
         />
+
         <div className="p-4">
           <div className="flex justify-between relative">
             <h1 className="text-2xl font-bold text-additional-second">
