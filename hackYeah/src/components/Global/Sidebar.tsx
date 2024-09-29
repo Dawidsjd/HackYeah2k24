@@ -11,8 +11,8 @@ const Sidebar = () => {
   return (
     <aside className="flex flex-col w-1/5 h-screen px-5 py-8 overflow-y-auto rounded-md bg-primary drop-shadow-custom-2">
       <NavLink to="/" className="flex items-center space-x-2">
-        <img src={Logo} alt="logo" className="w-20 h-20 rounded-full" /> {/* Adjusted logo size to 80px */}
-        <p className="text-tertiary text-xl font-bold">Investify</p> {/* Adjusted font size and weight */}
+        <img src={Logo} alt="logo" className="w-20 h-20 rounded-full" />
+        <p className="text-tertiary text-xl font-bold"><b>Investify</b></p>
       </NavLink>
 
       <div className="flex flex-col justify-between flex-1 mt-6">
@@ -30,7 +30,7 @@ const Sidebar = () => {
               }
             >
               <IoHomeOutline />
-              <span className="mx-2 text-sm font-medium">Home</span>
+              <span className="mx-2 text-sm font-medium"><b>Home</b></span>
             </NavLink>
             <NavLink
               to={'/course'}
@@ -44,7 +44,7 @@ const Sidebar = () => {
               }
             >
               <ImBooks />
-              <span className="mx-2 text-sm font-medium">Course</span>
+              <span className="mx-2 text-sm font-medium"><b>Course</b></span>
             </NavLink>
             <NavLink
               to={'/exams'}
@@ -58,7 +58,7 @@ const Sidebar = () => {
               }
             >
               <FaPencilAlt />
-              <span className="mx-2 text-sm font-medium">Exams</span>
+              <span className="mx-2 text-sm font-medium"><b>Exams</b></span>
             </NavLink>
             <NavLink
               to={'/traiding'}
@@ -72,7 +72,7 @@ const Sidebar = () => {
               }
             >
               <GiTakeMyMoney />
-              <span className="mx-2 text-sm font-medium">Demo Trading</span>
+              <span className="mx-2 text-sm font-medium"><b>Demo Trading</b></span>
             </NavLink>
           </div>
         </nav>
@@ -84,7 +84,7 @@ const Sidebar = () => {
             className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
           >
             <LuUser2 />
-            <span className="mx-2 text-sm font-medium">Settings</span>
+            <span className="mx-2 text-sm font-medium"><b>Settings</b></span>
           </NavLink>
         </div>
       </div>

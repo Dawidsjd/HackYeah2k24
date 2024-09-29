@@ -1,9 +1,8 @@
 // Traiding.tsx
-import React, { useState } from 'react';
-import CryptoGallery from './components/CryptoData/CryptoGallery';
-import CryptoDetails from './components/CryptoData/CryptoDetails'; // Importuj CryptoDetails
-import SearchBar from './components/SearchBar';
-import Navbar from './components/Navbar/Navbar';
+import { useEffect, useState } from "react";
+import CryptoGallery from "./components/CryptoData/CryptoGallery";
+import CryptoDetails from "./components/CryptoData/CryptoDetails"; // Importuj CryptoDetails
+import SearchBar from "./components/SearchBar";
 
 const Traiding = () => {
   const [selectedCrypto, setSelectedCrypto] = useState<string | null>(null); // Stan dla wybranej kryptowaluty
@@ -15,6 +14,7 @@ const Traiding = () => {
   const handleBack = () => {
     setSelectedCrypto(null); // Cofnij do galerii
   };
+  const [filter, setFilter] = useState<string>("");
 
   return (
     <div className="min-h-screen bg-[#0F172A] p-4">
@@ -22,11 +22,17 @@ const Traiding = () => {
         <CryptoDetails onBack={handleBack} /> // Wyświetl wykres bez opakowania modalnego
       ) : (
         <>
-        
-          <SearchBar />
-          
+          <SearchBar
+            onChange={(e: any) => {
+              setFilter(e.target.value);
+            }}
+          />
           <div className="p-4">
-            <CryptoGallery onCryptoSelect={handleCryptoSelect} /> {/* Przekaż funkcję do CryptoGallery */}
+            <CryptoGallery
+              filter={filter}
+              onCryptoSelect={handleCryptoSelect}
+            />{" "}
+            {/* Przekaż funkcję do CryptoGallery */}
           </div>
         </>
       )}
