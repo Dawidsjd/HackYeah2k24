@@ -44,16 +44,22 @@ const Exercises = (props: ExerciseProps) => {
       props.onAnswer(isCorrect); // Wywołaj callback z odpowiedzią
       setAnswersVisible(true); // Przywróć widoczność odpowiedzi
       setQuestionVisible(true); // Przywróć widoczność pytania
-    }, 1500);
+    }, 750);
   };
 
   return (
     <div style={{ color: "white" }}>
       <div className="p-4 bg-gray-800 rounded-md shadow-lg">
         {/* Dodanie zdjęcia nad pytaniem */}
-        <img src={imageSrc} alt="Wombat" className="mx-auto mb-4 w-64 h-64 drop-shadow-2xl" />
+        <img
+          src={imageSrc}
+          alt="Wombat"
+          className="mx-auto mb-4 w-64 h-64 drop-shadow-2xl"
+        />
         {questionVisible && (
-          <div className="font-bold text-lg mb-2 text-center">{props.exercise.question}</div>
+          <div className="font-bold text-lg mb-2 text-center">
+            {props.exercise.question}
+          </div>
         )}
         <div className="space-y-2">
           {answersVisible &&

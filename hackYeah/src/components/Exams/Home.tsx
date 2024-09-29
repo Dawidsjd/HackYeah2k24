@@ -31,9 +31,12 @@ const ExamStart = ({ level }: { level: number }) => {
           Exam Recomennded to Pass into next level:
           {recommendId < 3 ? (
             <div>
-              <button onClick={() => setExamOpen(Exams[recommendId].id)}>
+              <span
+                className="badge badge-white cursor-pointer"
+                onClick={() => setExamOpen(Exams[recommendId].id)}
+              >
                 {Exams[recommendId].title}
-              </button>
+              </span>
             </div>
           ) : (
             <span>
@@ -42,19 +45,16 @@ const ExamStart = ({ level }: { level: number }) => {
           )}
           All Exams:
           <div className="flex space-x-2">
-  {Exams.map((exam) => (
-    <span
-      key={exam.id}
-      className="badge badge-white cursor-pointer"
-      onClick={() => setExamOpen(exam.id)}
-    >
-      {exam.title}
-    </span>
-  ))}
-</div>
-
-
-
+            {Exams.map((exam) => (
+              <span
+                key={exam.id}
+                className="badge badge-white cursor-pointer"
+                onClick={() => setExamOpen(exam.id)}
+              >
+                {exam.title}
+              </span>
+            ))}
+          </div>
           {examOpen != null && (
             <Exam
               exercises={Exams[examOpen].exercises}
