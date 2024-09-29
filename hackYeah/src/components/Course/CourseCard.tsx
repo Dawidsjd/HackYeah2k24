@@ -7,7 +7,7 @@ const CourseCard = ({ title, image, levelOfAdvancement, id }) => {
       to={`/course/${id}`} // Navigate to course detail
       className="shadow-custom-light hover:shadow-custom-hover rounded-md"
     >
-      <div key={id} className="rounded-md w-full h-[240px] overflow-hidden">
+      <div key={id} className="rounded-md w-full h-[260px] overflow-hidden">
         <div
           className="w-full h-[65%] rounded-t-md bg-cover bg-center transition-transform duration-300 ease-in-out filter grayscale hover:grayscale-0" // Added grayscale filter
           style={{ backgroundImage: `url(${image})` }}
