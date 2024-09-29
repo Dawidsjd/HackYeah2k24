@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaLongArrowAltRight } from "react-icons/fa";
-import '../Exercises/styles.css'
+import "../Exercises/styles.css";
 
 const CheckKnowledge = ({ level }: { level: number }) => {
   let knowledgeLevel: string = "no level";

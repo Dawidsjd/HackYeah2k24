@@ -1,13 +1,13 @@
-import QuickStart from './QuickStart';
-import CheckKnowledge from './CheckKnowledge';
-import CryptoList from './CryptoList';
-import CryptoNews from './CryptoNews';
-import CryptoChartEur from './CryptoChartEur';
-import MarketStandChart from './MarketStandChart';
-import '../Exercises/styles.css'
+import QuickStart from "./QuickStart";
+import CheckKnowledge from "./CheckKnowledge";
+import CryptoList from "./CryptoList";
+import CryptoNews from "./CryptoNews";
+import CryptoChartEur from "./CryptoChartEur";
+import MarketStandChart from "./MarketStandChart";
+import "../Exercises/styles.css";
 
 const Panel = ({ level }: { level: number }) => {
-  const tileStyle = 'flex rounded-xl shadow-custom-light  ';
+  const tileStyle = "flex rounded-xl shadow-custom-light  ";
   return (
     <div className="flex flex-col w-full mt-8 space-y-4">
       <div className="flex space-x-4">

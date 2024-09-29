@@ -28,17 +28,39 @@ const KnowledgeTest: React.FC<KnowledgeTestProps> = ({ setLevel }) => {
           setQuestionNr: any
         ) => {
           setLevel(correctCounter);
+          let knowledgeLevel: string = "no level";
+          let circleColor: string = "";
+          if (correctCounter >= 0) knowledgeLevel = "beginner";
+          if (correctCounter > 3) knowledgeLevel = "intermediate";
+          if (correctCounter > 6) knowledgeLevel = "expert";
+          if (knowledgeLevel === "no level") {
+            circleColor = "bg-blue-500";
+          } else if (knowledgeLevel === "beginner") {
+            circleColor = "bg-green-500";
+          } else if (knowledgeLevel === "intermediate") {
+            circleColor = "bg-orange-500";
+          } else if (knowledgeLevel === "expert") {
+            circleColor = "bg-red-500";
+          }
 
           return (
-            <div className="flex flex-col justify-center items-center">
-              <span className="text-2xl text-additional-second">
-                Correct Answers: {correctCounter}
-              </span>
-              <Link
-                to={"/"}
-                className="inline-flex items-center space-x-2 px-3 py-1 mt-6 bg-secondary text-additional-second rounded-md hover:bg-additional-second hover:text-primary transition-all"
+            <div className="w-full glass space-y-2 flex flex-row justify-around items-center shadow-custom-light">
+              <div
+                className={`w-32 h-32 rounded-full flex justify-center drop-shadow-custom-2 items-center ${circleColor}`}
               >
-                Back to Home
+                <div className="w-28 h-28 rounded-full flex justify-center items-center bg-tertiary drop-shadow-custom-2">
+                  <p className="text-m capitalize text-additional-first font-bold">
+                    {knowledgeLevel}
+                  </p>
+                </div>
+              </div>
+              <Link to={"/"}>
+                <button
+                  style={{ color: "black" }}
+                  className="bg-secondary text-additional-second px-2 py-1 rounded-md hover:bg-additional-second hover:text-primary transition"
+                >
+                  Go back to Home
+                </button>
               </Link>
             </div>
           );
