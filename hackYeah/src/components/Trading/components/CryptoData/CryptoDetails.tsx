@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TradingViewWidget from '../TradingViewWidget';
 import { FiPlus } from 'react-icons/fi';
-import { ArrowUpCircle, ArrowDownCircle, ArrowDownUp } from 'lucide-react';
+import { ArrowUpCircle, ArrowDownCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Navbar from '../Navbar/Navbar';
 
@@ -11,6 +11,7 @@ interface CryptoDetailsProps {
 
 const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddFundsModalOpen, setIsAddFundsModalOpen] = useState(false);
   const [actionType, setActionType] = useState<'buy' | 'sell' | null>(null);
   const [usdAmount, setUsdAmount] = useState('');
   const [btcAmount, setBtcAmount] = useState('');
@@ -18,29 +19,28 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
   const [usdtLogo, setUsdtLogo] = useState('');
   const [btcPrice, setBtcPrice] = useState(0);
   const [alertVisible, setAlertVisible] = useState(false);
-
-  // Define the account balance as a state
-  const [accountBalance, setAccountBalance] = useState(1000); // You can also fetch this dynamically if needed
+  const [accountBalance, setAccountBalance] = useState(1000);
+  const [addFundsAmount, setAddFundsAmount] = useState('');
+  const [currentCryptoAmount, setCurrentCryptoAmount] = useState(0);
+  const [sellAmount, setSellAmount] = useState('');
 
   useEffect(() => {
     const fetchLogosAndRate = async () => {
       try {
-        const btcResponse = await fetch(
-          'https://api.coingecko.com/api/v3/coins/bitcoin'
-        );
-        const btcData = await btcResponse.json();
+        const [btcData, usdtData, priceData] = await Promise.all([
+          fetch('https://api.coingecko.com/api/v3/coins/bitcoin').then((res) =>
+            res.json()
+          ),
+          fetch('https://api.coingecko.com/api/v3/coins/tether').then((res) =>
+            res.json()
+          ),
+          fetch(
+            'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd'
+          ).then((res) => res.json()),
+        ]);
+
         setBtcLogo(btcData.image.small);
-
-        const usdtResponse = await fetch(
-          'https://api.coingecko.com/api/v3/coins/tether'
-        );
-        const usdtData = await usdtResponse.json();
         setUsdtLogo(usdtData.image.small);
-
-        const priceResponse = await fetch(
-          'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd'
-        );
-        const priceData = await priceResponse.json();
         setBtcPrice(priceData.bitcoin.usd);
       } catch (error) {
         console.error('Error fetching logos or price:', error);
@@ -56,11 +56,32 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
     setUsdAmount('');
     setBtcAmount('');
     setAlertVisible(false);
+    if (type === 'sell') {
+      setSellAmount('');
+    }
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setActionType(null);
+  };
+
+  const handleAddFunds = () => {
+    const amount = parseFloat(addFundsAmount);
+    if (!isNaN(amount) && amount > 0) {
+      setAccountBalance((prevBalance) => prevBalance + amount);
+      setAddFundsAmount('');
+      setIsAddFundsModalOpen(false);
+    }
+  };
+
+  const handleOpenAddFundsModal = () => {
+    setIsAddFundsModalOpen(true);
+  };
+
+  const handleCloseAddFundsModal = () => {
+    setIsAddFundsModalOpen(false);
+    setAddFundsAmount('');
   };
 
   const handleUsdChange = (value: string) => {
@@ -69,7 +90,7 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
       setUsdAmount(value);
       if (!isNaN(usdValue) && btcPrice > 0) {
         const btcValue = usdValue / btcPrice;
-        setBtcAmount(btcValue.toFixed(6));
+        setBtcAmount(btcValue.toFixed(6)); // Ensure BTC amount is rounded to 6 decimal places
       } else {
         setBtcAmount('');
       }
@@ -85,7 +106,6 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
       setBtcAmount(value);
       if (!isNaN(btcValue) && btcPrice > 0) {
         const usdValue = btcValue * btcPrice;
-        // Check against account balance
         if (usdValue <= accountBalance) {
           setUsdAmount(usdValue.toFixed(2));
         } else {
@@ -103,17 +123,20 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
   const handleExchange = () => {
     setAlertVisible(true);
 
-    // Update account balance based on action type
     if (actionType === 'buy') {
       const usdValue = parseFloat(usdAmount);
       if (!isNaN(usdValue)) {
         setAccountBalance((prevBalance) => prevBalance - usdValue);
+        setCurrentCryptoAmount(
+          (prevAmount) => prevAmount + usdValue / btcPrice
+        ); // Update BTC holdings on buy
       }
     } else if (actionType === 'sell') {
-      const btcValue = parseFloat(btcAmount);
-      if (!isNaN(btcValue)) {
-        const usdValue = btcValue * btcPrice;
-        setAccountBalance((prevBalance) => prevBalance + usdValue);
+      const btcValue = parseFloat(sellAmount); // Używamy sellAmount, które użytkownik wprowadził
+      if (!isNaN(btcValue) && btcValue > 0) {
+        const usdValue = btcValue * btcPrice; // Obliczamy wartość w USD
+        setAccountBalance((prevBalance) => prevBalance + usdValue); // Dodajemy wartość USD do salda
+        setCurrentCryptoAmount((prevAmount) => prevAmount - btcValue); // Odejmujemy BTC od posiadanej ilości
       }
     }
 
@@ -123,7 +146,7 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
     setBtcAmount('');
     setTimeout(() => {
       setAlertVisible(false);
-    }, 3000); // Alert will disappear after 3 seconds
+    }, 3000);
   };
 
   return (
@@ -145,9 +168,12 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
           </h2>
           <div className="flex items-center justify-between">
             <span className="text-2xl font-bold text-white">
-              ${accountBalance}
+              ${accountBalance.toFixed(2)}
             </span>
-            <button className="text-white hover:bg-white hover:bg-opacity-10 p-1 rounded">
+            <button
+              onClick={handleOpenAddFundsModal}
+              className="text-white hover:bg-white hover:bg-opacity-10 p-1 rounded"
+            >
               <FiPlus className="h-5 w-5" />
               <span className="sr-only">Add funds</span>
             </button>
@@ -193,53 +219,115 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
               {actionType === 'buy' && (
                 <div>
                   <div className="py-4">
-                    <label className="block text-sm">Amount in USD:</label>
-                    <div className="flex items-center mb-2">
-                      <img
-                        src={usdtLogo}
-                        alt="USDT Logo"
-                        className="h-6 w-6 mr-2"
-                      />
-                    </div>
+                    <label className="block">Amount in USD:</label>
                     <input
                       type="number"
                       value={usdAmount}
                       onChange={(e) => handleUsdChange(e.target.value)}
                       className="input input-bordered w-full"
-                      placeholder="Enter amount in USDT"
+                      placeholder="Enter amount"
                     />
                   </div>
-
-                  <div className="flex justify-center -mb-[40px] mt-[10px]">
-                    <ArrowDownUp className="h-6 w-6 text-gray-500" />
-                  </div>
-
                   <div className="py-4">
-                    <label className="block text-sm">Amount in BTC:</label>
-                    <div className="flex items-center mb-2">
-                      <img
-                        src={btcLogo}
-                        alt="BTC Logo"
-                        className="h-6 w-6 mr-2"
-                      />
-                    </div>
+                    <label className="block">Amount in BTC:</label>
                     <input
-                      type="text"
+                      type="number"
                       value={btcAmount}
                       onChange={(e) => handleBtcChange(e.target.value)}
                       className="input input-bordered w-full"
-                      placeholder="Enter amount in BTC"
+                      placeholder="Calculated BTC amount"
+                      disabled
                     />
                   </div>
-                  <button
-                    onClick={handleExchange}
-                    className="btn bg-amber-400 hover:bg-amber-300 w-full mt-4 text-black"
-                  >
-                    Exchange
-                  </button>
                 </div>
               )}
-              {/* Add logic for sell modal here */}
+
+              {actionType === 'sell' && (
+                <div>
+                  <div className="py-4">
+                    <label className="block">Amount in BTC:</label>
+                    <input
+                      type="number"
+                      step="0.000001" // Umożliwia wprowadzanie wartości z 6 miejscami po przecinku
+                      value={sellAmount}
+                      onChange={(e) => {
+                        const value = e.target.value; // Pobierz wartość jako string
+                        // Sprawdź, czy wartość jest poprawna i w odpowiednim zakresie
+                        const parsedValue = parseFloat(value);
+                        if (!isNaN(parsedValue) && parsedValue >= 0) {
+                          if (parsedValue <= currentCryptoAmount) {
+                            setSellAmount(value); // Ustaw sellAmount na wprowadzoną wartość
+                          } else {
+                            setSellAmount(currentCryptoAmount.toFixed(6)); // Ustaw na maksimum
+                          }
+                        } else {
+                          setSellAmount(''); // Wyczyść, jeśli nie jest liczbą
+                        }
+                      }}
+                      onBlur={() => {
+                        // Przy utracie fokusu, zaokrąglij do 6 miejsc po przecinku
+                        setSellAmount((prev) => {
+                          const parsedValue = parseFloat(prev);
+                          return isNaN(parsedValue) || parsedValue <= 0
+                            ? ''
+                            : parsedValue.toFixed(6);
+                        });
+                      }}
+                      className="input input-bordered w-full"
+                      placeholder="Enter amount"
+                    />
+                  </div>
+                  <div className="py-4">
+                    <label className="block">You have:</label>
+                    <span className="font-bold">
+                      {currentCryptoAmount.toFixed(6)} BTC
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              <div className="modal-action">
+                <button onClick={handleExchange} className="btn btn-primary">
+                  {actionType === 'buy' ? 'Confirm Buy' : 'Confirm Sell'}
+                </button>
+                <button onClick={handleCloseModal} className="btn">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isAddFundsModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="modal modal-open">
+            <div className="modal-box relative">
+              <h2 className="font-bold text-lg">Add Funds</h2>
+              <button
+                onClick={handleCloseAddFundsModal}
+                className="absolute top-2 right-4 text-gray-500 hover:text-gray-700 text-3xl"
+              >
+                &times;
+              </button>
+              <div className="py-4">
+                <label className="block">Amount to add:</label>
+                <input
+                  type="number"
+                  value={addFundsAmount}
+                  onChange={(e) => setAddFundsAmount(e.target.value)}
+                  className="input input-bordered w-full"
+                  placeholder="Enter amount"
+                />
+              </div>
+              <div className="modal-action">
+                <button onClick={handleAddFunds} className="btn btn-primary">
+                  Add Funds
+                </button>
+                <button onClick={handleCloseAddFundsModal} className="btn">
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -247,27 +335,12 @@ const CryptoDetails: React.FC<CryptoDetailsProps> = ({ onBack }) => {
 
       {alertVisible && (
         <motion.div
-          role="alert"
-          initial={{ opacity: 0, x: 100 }} // Initial state: hidden and off-screen to the right
-          animate={{ opacity: 1, x: 0 }} // Animate to visible and move to original position
-          exit={{ opacity: 0, x: 100 }} // Animate back to hidden and move off-screen to the right
-          transition={{ duration: 0.3 }} // Transition duration
-          className="fixed bottom-4 right-4 w-1/2 z-50 alert alert-success mb-4 shadow-2xl"
+          className="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-green-500 text-white p-4 rounded shadow-lg"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 shrink-0 stroke-current"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          <span>Your purchase has been confirmed!</span>
+          {actionType === 'buy' ? 'Purchase successful!' : 'Sale successful!'}
         </motion.div>
       )}
     </div>
