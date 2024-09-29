@@ -2,7 +2,7 @@ import { useState } from "react";
 import Sidebar from "../Global/Sidebar";
 import { Exams } from "./Exams";
 import Exam from "./Exam";
-import '../Exercises/styles.css'
+import "../Exercises/styles.css";
 
 const styles = {
   container: {
@@ -21,10 +21,10 @@ const styles = {
 
 const ExamStart = ({ level }: { level: number }) => {
   const [examOpen, setExamOpen] = useState<number | null>(null);
-  const [correctCounter, setCorrect] = useState(-1);
   const openExam = (id: number) => {
-    setCorrect(-1);
+    setCorrectAnswers(0);
     setExamOpen(id);
+    setTotalAnswers(0);
   };
   const [correctAnswers, setCorrectAnswers] = useState<number>(0);
   const [totalAnswers, setTotalAnswers] = useState<number>(0);
@@ -35,12 +35,20 @@ const ExamStart = ({ level }: { level: number }) => {
   if (level > 3) recommendId = 2;
   if (level > 6) recommendId = 3;
 
-  const handleExamEnd = (correctCounter: number) => {
+  const handleExamEnd = (
+    correctCounter: number,
+    setCounter: any,
+    setQuestionNr: any
+  ) => {
     setCorrectAnswers(correctCounter);
     setTotalAnswers(Exams[examOpen!].exercises.length);
-
+    setCounter(0);
+    setQuestionNr(0);
+    setExamOpen(null);
     // Ustaw zdjęcie w zależności od poprawności odpowiedzi
-    setImageSrc(correctCounter > totalAnswers / 2 ? "/wombat-win.png" : "/wombat-cry.png");
+    setImageSrc(
+      correctAnswers > totalAnswers / 2 ? "/wombat-win.png" : "/wombat-cry.png"
+    );
   };
 
   return (
@@ -84,26 +92,32 @@ const ExamStart = ({ level }: { level: number }) => {
                 setCounter: any,
                 setQuestionNr: any
               ) => {
-                setCounter(0);
-                setQuestionNr(0);
-                setCorrect(correctCounter);
-                setExamOpen(null);
+                handleExamEnd(correctCounter, setCounter, setQuestionNr);
               }}
             />
           )}
           {/* Wyświetlanie wyniku po zakończeniu egzaminu */}
-        {totalAnswers > 0 && (
-  <div className="flex flex-col items-center mt-4">
-    <h1 className="text-2xl drop-shadow-custom" style={{ color: correctAnswers > totalAnswers / 2 ? "green" : "red" }}>
-      Correct Answers: {correctAnswers} / {totalAnswers}
-    </h1>
-    {/* Wyświetlanie zdjęcia w zależności od poprawności odpowiedzi */}
-    <img src={imageSrc} alt="Wombat" className="mx-auto w-64 h-64 drop-shadow-custom" />
-  </div>
-)}
+          {totalAnswers > 0 && (
+            <div className="flex flex-col items-center mt-4">
+              <h1
+                className="text-2xl drop-shadow-custom"
+                style={{
+                  color: correctAnswers > totalAnswers / 2 ? "green" : "red",
+                }}
+              >
+                Correct Answers: {correctAnswers} / {totalAnswers}
+              </h1>
+              {/* Wyświetlanie zdjęcia w zależności od poprawności odpowiedzi */}
+              <img
+                src={imageSrc}
+                alt="Wombat"
+                className="mx-auto w-64 h-64 drop-shadow-custom"
+              />
+            </div>
+          )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
