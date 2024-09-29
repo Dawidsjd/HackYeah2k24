@@ -19,6 +19,7 @@ const Course: React.FC<CourseProps> = ({ level, setLevel }) => {
     } else if (level >= 7) {
       return 'Expert';
     }
+    return 'Unknown'; // Default case
   };
 
   // Filter courses by the current level
@@ -30,6 +31,9 @@ const Course: React.FC<CourseProps> = ({ level, setLevel }) => {
   const otherCourses = courses.filter(
     (course: CourseType) => course.levelOfAdvancement !== level
   );
+
+  console.log('Filtered Courses:', filteredCourses); // Debugging line
+  console.log('Other Courses:', otherCourses); // Debugging line
 
   return (
     <div className="flex bg-primary">
@@ -43,14 +47,17 @@ const Course: React.FC<CourseProps> = ({ level, setLevel }) => {
         {/* Grid layout for filtered courses */}
         <div className="grid grid-cols-3 gap-4">
           {filteredCourses.length > 0 ? (
-            filteredCourses.map((course: CourseType) => (
-              <CourseCard
-                key={course.id} // Add a key prop for unique identification
-                id={course.id}
-                levelOfAdvancement={getLevelName(course.levelOfAdvancement)}
-                title={course.title}
-              />
-            ))
+            filteredCourses.map((course: CourseType) => {
+              console.log('Course Level:', course.levelOfAdvancement); // Debugging line
+              return (
+                <CourseCard
+                  key={course.id} // Add a key prop for unique identification
+                  id={course.id}
+                  levelOfAdvancement={getLevelName(course.levelOfAdvancement)} // Correct usage here
+                  title={course.title}
+                />
+              );
+            })
           ) : (
             <p>No courses available at this level.</p>
           )}
@@ -63,7 +70,7 @@ const Course: React.FC<CourseProps> = ({ level, setLevel }) => {
             <CourseCard
               key={course.id} // Add a key prop for unique identification
               id={course.id}
-              levelOfAdvancement={getLevelName(course.levelOfAdvancement)}
+              levelOfAdvancement={getLevelName(course.levelOfAdvancement)} // Use correct course level
               title={course.title}
             />
           ))}
