@@ -1,9 +1,9 @@
-import { FullExcercises } from "../Exercises/CoursesExcercises";
-import Exam from "../Exams/Exam";
-import { ExerciseType } from "../../type";
-import { Link } from "react-router-dom";
-import { FaLongArrowAltRight } from "react-icons/fa";
-import { shuffle } from "../Exercises/Exercises";
+import { FullExcercises } from '../Exercises/CoursesExcercises';
+import Exam from '../Exams/Exam';
+import { ExerciseType } from '../../type';
+import { Link } from 'react-router-dom';
+import { FaLongArrowAltRight } from 'react-icons/fa';
+import { shuffle } from '../Exercises/Exercises';
 
 interface KnowledgeTestProps {
   setLevel: (level: number) => void; // Specify the type for setLevel
@@ -26,23 +26,17 @@ const KnowledgeTest: React.FC<KnowledgeTestProps> = ({ setLevel }) => {
           setLevel(correctCounter);
 
           return (
-            <>
-              <span>Correct Answers: {correctCounter}</span>
+            <div className="flex flex-col justify-center items-center">
+              <span className="text-2xl text-additional-second">
+                Correct Answers: {correctCounter}
+              </span>
               <Link
-                to={"/"}
-                className="inline-flex items-center space-x-2 px-3 py-1 bg-primary text-additional-second rounded-md hover:bg-tertiary hover:text-primary transition-all"
-              >
-                <span>Go Back to Home</span>
-                <FaLongArrowAltRight />
-              </Link>
-              {/* Nowy przycisk "Back to Home" */}
-              <Link
-                to={"/"}
-                className="inline-flex items-center space-x-2 px-3 py-1 mt-2 bg-secondary text-white rounded-md hover:bg-secondary-dark transition-all"
+                to={'/'}
+                className="inline-flex items-center space-x-2 px-3 py-1 mt-6 bg-secondary text-additional-second rounded-md hover:bg-additional-second hover:text-primary transition-all"
               >
                 Back to Home
               </Link>
-            </>
+            </div>
           );
         }}
       />
