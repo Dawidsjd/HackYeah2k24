@@ -7,7 +7,9 @@ const Welcome: React.FC = () => {
       <h1 className="text-additional-second text-6xl bold fade-in">
         Welcome to <b>Investify</b>
       </h1>
-      <span className="text-neutral fade-in">Description text to setup</span>
+      <span className="text-neutral fade-in">
+        Start Your Crypto Journey: Learn to Trade with Confidence
+      </span>
     </div>
   );
 };
