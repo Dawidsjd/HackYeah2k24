@@ -11,14 +11,18 @@ const Exam = (props: ExamProps) => {
     if (correct) setCounter(correctCounter + 1);
     setQuestionNr(questionNr + 1);
   };
-
+  const onEnd = () => {
+    setCounter(0);
+    setQuestionNr(0);
+    return props.onEnd(correctCounter, setCounter, setQuestionNr);
+  };
   return (
     <div>
       {/* <h1 className="">{title}</h1> */}
       {questionNr < exercises.length && (
         <Exercises exercise={exercises[questionNr]} onAnswer={onAnswer} />
       )}
-      {questionNr == exercises.length && props.onEnd(correctCounter)}
+      {questionNr == exercises.length && onEnd()}
     </div>
   );
 };

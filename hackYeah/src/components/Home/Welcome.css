@@ -1,0 +1,21 @@
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px; /* Odstęp od góry */
+  }
+  
+  .fade-in {
+    opacity: 0; /* Zaczynamy od niewidocznego */
+    transform: translateY(20px); /* Początkowa pozycja jest lekko przesunięta w dół */
+    animation: fadeIn 1s forwards; /* Animacja fadeIn trwa 1 sekundę */
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1; /* Końcowa przezroczystość */
+      transform: translateY(0); /* Końcowa pozycja */
+    }
+  }
+  

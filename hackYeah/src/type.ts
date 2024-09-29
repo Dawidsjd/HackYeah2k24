@@ -26,8 +26,6 @@ export type CourseType = {
   image: string;
   title: string;
   introduction: string;
-  mainArticlePartOne: string;
-  mainArticlePartTwo: string;
+  mainArticle: string;
   levelOfAdvancement: number;
-  linkToArticle: string;
 };
