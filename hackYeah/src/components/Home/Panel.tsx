@@ -12,18 +12,33 @@ const Panel = ({ level }: { level: number }) => {
         <div className={`justify-start w-1/2 bg-secondary ${tileStyle}`}>
           <CheckKnowledge level={level} />
         </div>
-        <div className={`justify-end  w-1/2 ${tileStyle}`}>
+        <div className={`justify-end bg-[#1e222d] w-1/2 ${tileStyle}`}>
           <QuickStart />
         </div>
       </div>
-      <div className="flex space-x-4 mt-2">
-        <div className={`justify-start w-2/3 `}>
-          {/* <CryptoChartEur/> */}
-          <MarketStandChart/>
-        </div>
-        <div className={`justify-end w-1/3 h-[40vh]`}>
-          <CryptoNews />
-        </div>
+      <div className="flex  space-x-4 mt-2">
+      <div className={`relative justify-start shadow-custom-light rounded-xl w-2/3 overflow-hidden`}>
+  {/* <CryptoChartEur/> */}
+  <MarketStandChart />
+  <img
+    src="/wombat-win.png"
+    alt="Wombat"
+    className="absolute rotate-[347deg] right-[-25px] bottom-[-30px] w-24 h-24 object-contain drop-shadow-custom"
+  />
+</div>
+
+
+        <div className={`relative justify-end w-1/3 h-[40vh] shadow-custom-light rounded-xl overflow-hidden`}>
+  <CryptoNews />
+  <img
+    src="/logo.png"
+    alt="Wombat"
+    className="absolute -translate-x-1/2 rotate-[347deg] right-[-70px] top-[-30px] w-24 h-24 object-contain"
+  />
+</div>
+
+
+
       </div>
     </div>
   );

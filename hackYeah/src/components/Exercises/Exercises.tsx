@@ -53,7 +53,7 @@ const Exercises = (props: ExerciseProps) => {
     <div className="flex justify-center w-full items-center h-full">
       <div className="mockup-window drop-shadow-custom-mockup w-full h-[70vh] bg-gray-950 p-4">
         <div className="flex flex-col bg-gray-900 h-full rounded-lg">
-          {/* Image above the question */}
+          {/* Dodanie zdjęcia nad pytaniem */}
           <img
             src={imageSrc}
             alt="Wombat"
