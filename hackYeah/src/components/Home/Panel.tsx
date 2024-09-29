@@ -4,15 +4,17 @@ import CryptoList from './CryptoList';
 import CryptoNews from './CryptoNews';
 import CryptoChartEur from './CryptoChartEur';
 import MarketStandChart from './MarketStandChart';
+import '../Exercises/styles.css'
+
 const Panel = ({ level }: { level: number }) => {
-  const tileStyle = 'flex rounded-xl shadow-custom-light p-2 ';
+  const tileStyle = 'flex rounded-xl shadow-custom-light  ';
   return (
     <div className="flex flex-col w-full mt-8 space-y-4">
       <div className="flex space-x-4">
         <div className={`justify-start w-1/2 bg-secondary ${tileStyle}`}>
           <CheckKnowledge level={level} />
         </div>
-        <div className={`justify-end bg-[#1e222d] w-1/2 ${tileStyle}`}>
+        <div className={`justify-end bg-[#1e222d] w-1/2 p-2 ${tileStyle}`}>
           <QuickStart />
         </div>
       </div>

@@ -19,7 +19,7 @@ const CheckKnowledge = ({ level }: { level: number }) => {
   }
 
   return (
-    <div className="w-full space-y-2 flex flex-row justify-around items-center">
+    <div className="w-full glass space-y-2 flex flex-row justify-around items-center shadow-custom-light">
       <div>
         <p className="text-xl font-bold text-primary mb-2">
           Check your knowledge level
