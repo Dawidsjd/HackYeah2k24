@@ -3,6 +3,7 @@ import { courses } from './Courses'; // Import your courses array
 import { CourseType } from '../../type'; // Typing for course objects
 import Sidebar from '../Global/Sidebar';
 import CourseCard from './CourseCard';
+import { Link } from 'react-router-dom'; // Import Link for navigation
 
 interface CourseProps {
   level: number; // Current level prop
@@ -12,22 +13,23 @@ interface CourseProps {
 const Course: React.FC<CourseProps> = ({ level, setLevel }) => {
   // Function to determine level name
   const getCourseLevelName = (level: number): string => {
-    if (level == 1) {
+    if (level === 1) {
       return 'Beginner';
-    } else if (level == 2) {
+    } else if (level === 2) {
       return 'Intermediate';
-    } else if (level == 3) {
+    } else if (level === 3) {
       return 'Expert';
     }
     return 'No Level'; // Default case
   };
 
   const getUserLevelName = (level: number): string => {
-    if (level >= 0) return 'Beginner';
-    if (level > 3) return 'Intermediate';
     if (level > 6) return 'Expert';
+    if (level > 3) return 'Intermediate';
+    if (level >= 0) return 'Beginner';
     return 'No level';
   };
+
   // Filter courses by the current level
   const filteredCourses = courses.filter(
     (course: CourseType) =>
@@ -51,6 +53,18 @@ const Course: React.FC<CourseProps> = ({ level, setLevel }) => {
         style={{ maxHeight: '95vh' }}
       >
         <h1>Courses for {getUserLevelName(level)}</h1>
+
+        {/* Conditional rendering for "No Level" */}
+        {getUserLevelName(level) === 'No level' && (
+          <div className="mb-4 flex justify-between items-center">
+            <p>Take the test to find out your level of advancement</p>
+            <Link to="/knowledge-test">
+              <button className="bg-secondary text-additional-second px-2 py-1 rounded-md hover:bg-additional-second hover:text-primary transition">
+                Take the Test
+              </button>
+            </Link>
+          </div>
+        )}
 
         {/* Grid layout for filtered courses */}
         <div className="grid grid-cols-3 gap-4">

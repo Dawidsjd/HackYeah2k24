@@ -5,10 +5,11 @@ import { FaPencilAlt } from 'react-icons/fa';
 import { GiTakeMyMoney } from 'react-icons/gi';
 import { LuUser2 } from 'react-icons/lu';
 import Logo from '/logo.png';
+import '../Exercises/styles.css'
 
 const Sidebar = () => {
   return (
-    <aside className="flex flex-col w-1/5 h-screen px-5 py-8 overflow-y-auto bg-primary shadow-lg"> {/* Dodano shadow */}
+    <aside className="flex flex-col w-1/5 h-screen px-5 py-8 overflow-y-auto rounded-md bg-primary drop-shadow-custom-2">
       <NavLink to="/" className="flex items-center space-x-2">
         <img src={Logo} alt="logo" className="w-20 h-20 rounded-full" />
         <p className="text-tertiary text-xl font-bold"><b>Investify</b></p>
