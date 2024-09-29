@@ -18,37 +18,46 @@ const KnowledgeTest: React.FC<KnowledgeTestProps> = ({ setLevel }) => {
   });
 
   return (
-    <Exam
-      exercises={questions}
-      title="Knowledge Exam"
-      onEnd={(correctCounter: number) => {
-        // Set level based on the correctCounter value
-        let level = 0;
+    <div className='mt-28'>
+  <Exam
+    exercises={questions}
+    title="Knowledge Exam"
+    onEnd={(correctCounter: number) => {
+      let level = 0;
 
-        if (correctCounter >= 0 && correctCounter <= 3) {
-          level = 1; // Level 1 for 0-3 correct answers
-        } else if (correctCounter >= 4 && correctCounter <= 6) {
-          level = 2; // Level 2 for 4-6 correct answers
-        } else if (correctCounter >= 7) {
-          level = 3; // Level 3 for 7 or more correct answers
-        }
+      if (correctCounter >= 0 && correctCounter <= 3) {
+        level = 1;
+      } else if (correctCounter >= 4 && correctCounter <= 6) {
+        level = 2;
+      } else if (correctCounter >= 7) {
+        level = 3;
+      }
 
-        setLevel(level); // Update the level based on correct answers
+      setLevel(level);
 
-        return (
-          <>
-            <span>Correct Answers: {correctCounter}</span>
-            <Link
-              to={'/'}
-              className="inline-flex items-center space-x-2 px-3 py-1 bg-primary text-additional-second rounded-md hover:bg-tertiary hover:text-primary transition-all"
-            >
-              <span>Go Back to Home</span>
-              <FaLongArrowAltRight />
-            </Link>
-          </>
-        );
-      }}
-    />
+      return (
+        <>
+          <span>Correct Answers: {correctCounter}</span>
+          <Link
+            to={'/'}
+            className="inline-flex items-center space-x-2 px-3 py-1 bg-primary text-additional-second rounded-md hover:bg-tertiary hover:text-primary transition-all"
+          >
+            <span>Go Back to Home</span>
+            <FaLongArrowAltRight />
+          </Link>
+          {/* Nowy przycisk "Back to Home" */}
+          <Link
+            to={'/'}
+            className="inline-flex items-center space-x-2 px-3 py-1 mt-2 bg-secondary text-white rounded-md hover:bg-secondary-dark transition-all"
+          >
+            Back to Home
+          </Link>
+        </>
+      );
+    }}
+  />
+</div>
+
   );
 };
 
