@@ -7,7 +7,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "hackyeah",
+    "productName": "Investify",
     "version": "0.1.0"
   },
   "tauri": {
@@ -58,7 +58,7 @@
         "fullscreen": false,
         "height": 800,
         "resizable": false,
-        "title": "hackyeah",
+        "title": "Investify",
         "width": 1200
       }
     ]
