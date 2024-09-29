@@ -12,8 +12,6 @@ const Exam = (props: ExamProps) => {
     setQuestionNr(questionNr + 1);
   };
   const onEnd = () => {
-    setCounter(0);
-    setQuestionNr(0);
     return props.onEnd(correctCounter, setCounter, setQuestionNr);
   };
   return (
