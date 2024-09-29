@@ -19,6 +19,11 @@ const styles = {
 };
 const ExamStart = ({ level }: { level: number }) => {
   const [examOpen, setExamOpen] = useState<number | null>(null);
+  const [correctCounter, setCorrect] = useState(-1);
+  const openExam = (id: number) => {
+    setCorrect(-1);
+    setExamOpen(id);
+  };
   let recommendId = 0;
   if (level >= 0) recommendId = 1;
   if (level > 3) recommendId = 2;
@@ -33,7 +38,7 @@ const ExamStart = ({ level }: { level: number }) => {
             <div>
               <span
                 className="badge badge-white cursor-pointer"
-                onClick={() => setExamOpen(Exams[recommendId].id)}
+                onClick={() => openExam(Exams[recommendId].id)}
               >
                 {Exams[recommendId].title}
               </span>
@@ -49,7 +54,7 @@ const ExamStart = ({ level }: { level: number }) => {
               <span
                 key={exam.id}
                 className="badge badge-white cursor-pointer"
-                onClick={() => setExamOpen(exam.id)}
+                onClick={() => openExam(exam.id)}
               >
                 {exam.title}
               </span>
@@ -59,11 +64,19 @@ const ExamStart = ({ level }: { level: number }) => {
             <Exam
               exercises={Exams[examOpen].exercises}
               title={Exams[examOpen].title}
-              onEnd={(correctCounter: number) => {
-                return <h1>Correct Answers: {correctCounter}</h1>;
+              onEnd={(
+                correctCounter: number,
+                setCounter: any,
+                setQuestionNr: any
+              ) => {
+                setCounter(0);
+                setQuestionNr(0);
+                setCorrect(correctCounter);
+                setExamOpen(null);
               }}
             />
           )}
+          {correctCounter >= 0 && <h1>Correct Answers: {correctCounter}</h1>}
         </div>
       </div>
     </>
