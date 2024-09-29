@@ -56,11 +56,13 @@ const ExamStart = ({ level }: { level: number }) => {
       <div style={styles.container} className="bg-primary">
         <Sidebar />
         <div className="flex-1 m-4 rounded-sm p-2">
-          <p className="mb-2">Exam Recomennded to Pass into next level:</p>
+          <p className="mb-2 text-tertiary">
+            Exam Recommended to Pass into next level:
+          </p>
           {recommendId < 3 ? (
             <div>
               <span
-                className="badge p-4 mb-2 badge-accent cursor-pointer"
+                className="badge p-4 mb-2 bg-secondary text-additional-first cursor-pointer"
                 onClick={() => openExam(Exams[recommendId].id)}
               >
                 {Exams[recommendId].title}
@@ -68,10 +70,10 @@ const ExamStart = ({ level }: { level: number }) => {
             </div>
           ) : (
             <span>
-              You have reached maximum level of knowledge that we provide
+              You have reached the maximum level of knowledge that we provide
             </span>
           )}
-          <p className="mb-2">All Exams:</p>
+          <p className="mb-2 text-tertiary">All Exams:</p>
           <div className="flex space-x-2">
             {Exams.map((exam) => (
               <span
@@ -83,7 +85,7 @@ const ExamStart = ({ level }: { level: number }) => {
               </span>
             ))}
           </div>
-          {examOpen != null && (
+          {examOpen != null ? (
             <Exam
               exercises={Exams[examOpen].exercises}
               title={Exams[examOpen].title}
@@ -95,6 +97,14 @@ const ExamStart = ({ level }: { level: number }) => {
                 handleExamEnd(correctCounter, setCounter, setQuestionNr);
               }}
             />
+          ) : (
+            totalAnswers === 0 && ( // Sprawdź, czy totalAnswers jest równe 0
+              <img
+                src="/wombat-mys.png"
+                alt="Wombat"
+                className="mx-auto w-96 h-96 drop-shadow-custom filter opacity-10 pointer-events-none select-none`"
+              />
+            )
           )}
           {/* Wyświetlanie wyniku po zakończeniu egzaminu */}
           {totalAnswers > 0 && (
@@ -111,7 +121,7 @@ const ExamStart = ({ level }: { level: number }) => {
               <img
                 src={imageSrc}
                 alt="Wombat"
-                className="mx-auto w-64 h-64 drop-shadow-custom"
+                className="mx-auto w-64 h-64 drop-shadow-custom pointer-events-none select-none"
               />
             </div>
           )}
