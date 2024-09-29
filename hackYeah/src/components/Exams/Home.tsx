@@ -2,6 +2,7 @@ import { useState } from "react";
 import Sidebar from "../Global/Sidebar";
 import { Exams } from "./Exams";
 import Exam from "./Exam";
+import '../Exercises/styles.css'
 
 const styles = {
   container: {
@@ -17,6 +18,7 @@ const styles = {
     padding: "10px",
   } as React.CSSProperties,
 };
+
 const ExamStart = ({ level }: { level: number }) => {
   const [examOpen, setExamOpen] = useState<number | null>(null);
   const [correctCounter, setCorrect] = useState(-1);
@@ -24,10 +26,23 @@ const ExamStart = ({ level }: { level: number }) => {
     setCorrect(-1);
     setExamOpen(id);
   };
+  const [correctAnswers, setCorrectAnswers] = useState<number>(0);
+  const [totalAnswers, setTotalAnswers] = useState<number>(0);
+  const [imageSrc, setImageSrc] = useState("/wombat-neutral.png"); // Stan dla źródła obrazka
+
   let recommendId = 0;
   if (level >= 0) recommendId = 1;
   if (level > 3) recommendId = 2;
   if (level > 6) recommendId = 3;
+
+  const handleExamEnd = (correctCounter: number) => {
+    setCorrectAnswers(correctCounter);
+    setTotalAnswers(Exams[examOpen!].exercises.length);
+
+    // Ustaw zdjęcie w zależności od poprawności odpowiedzi
+    setImageSrc(correctCounter > totalAnswers / 2 ? "/wombat-win.png" : "/wombat-cry.png");
+  };
+
   return (
     <>
       <div style={styles.container} className="bg-primary">
@@ -76,10 +91,19 @@ const ExamStart = ({ level }: { level: number }) => {
               }}
             />
           )}
-          {correctCounter >= 0 && <h1>Correct Answers: {correctCounter}</h1>}
+          {/* Wyświetlanie wyniku po zakończeniu egzaminu */}
+        {totalAnswers > 0 && (
+  <div className="flex flex-col items-center mt-4">
+    <h1 className="text-2xl drop-shadow-custom" style={{ color: correctAnswers > totalAnswers / 2 ? "green" : "red" }}>
+      Correct Answers: {correctAnswers} / {totalAnswers}
+    </h1>
+    {/* Wyświetlanie zdjęcia w zależności od poprawności odpowiedzi */}
+    <img src={imageSrc} alt="Wombat" className="mx-auto w-64 h-64 drop-shadow-custom" />
+  </div>
+)}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -18,7 +18,7 @@ const Exam = (props: ExamProps) => {
   };
   return (
     <div>
-      <h1>{title}</h1>
+      {/* <h1 className="">{title}</h1> */}
       {questionNr < exercises.length && (
         <Exercises exercise={exercises[questionNr]} onAnswer={onAnswer} />
       )}
