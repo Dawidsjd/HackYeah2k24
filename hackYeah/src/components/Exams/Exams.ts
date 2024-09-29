@@ -10,7 +10,7 @@ export const Exams: ExamType[] = [
       ...FullExcercises[1],
       ...FullExcercises[2],
     ], // Łączenie ćwiczeń z modułów 1-3
-    title: "Modules 1-3",
+    title: "What Are Cryptocurrencies and basics of them.",
   },
   {
     id: 1,
@@ -19,7 +19,7 @@ export const Exams: ExamType[] = [
       ...FullExcercises[4],
       ...FullExcercises[5],
     ], // Łączenie ćwiczeń z modułów 4-6
-    title: "Modules 4-6",
+    title: "Investments Basics",
   },
   {
     id: 2,
@@ -28,6 +28,6 @@ export const Exams: ExamType[] = [
       ...FullExcercises[7],
       ...FullExcercises[8],
     ], // Łączenie ćwiczeń z modułów 7-9
-    title: "Modules 7-9",
+    title: "Advanced Investments",
   },
 ];

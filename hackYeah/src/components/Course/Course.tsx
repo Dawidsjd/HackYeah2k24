@@ -11,25 +11,33 @@ interface CourseProps {
 
 const Course: React.FC<CourseProps> = ({ level, setLevel }) => {
   // Function to determine level name
-  const getLevelName = (level: number): string => {
-    if (level >= 0 && level <= 3) {
+  const getCourseLevelName = (level: number): string => {
+    if (level == 1) {
       return 'Beginner';
-    } else if (level >= 4 && level <= 6) {
+    } else if (level == 2) {
       return 'Intermediate';
-    } else if (level >= 7) {
+    } else if (level == 3) {
       return 'Expert';
     }
-    return 'Unknown'; // Default case
+    return 'No Level'; // Default case
   };
 
+  const getUserLevelName = (level: number): string => {
+    if (level >= 0) return 'Beginner';
+    if (level > 3) return 'Intermediate';
+    if (level > 6) return 'Expert';
+    return 'No level';
+  };
   // Filter courses by the current level
   const filteredCourses = courses.filter(
-    (course: CourseType) => course.levelOfAdvancement === level
+    (course: CourseType) =>
+      getCourseLevelName(course.levelOfAdvancement) === getUserLevelName(level)
   );
 
   // Remaining courses not at the selected level
   const otherCourses = courses.filter(
-    (course: CourseType) => course.levelOfAdvancement !== level
+    (course: CourseType) =>
+      getCourseLevelName(course.levelOfAdvancement) !== getUserLevelName(level)
   );
 
   console.log('Filtered Courses:', filteredCourses); // Debugging line
@@ -42,7 +50,7 @@ const Course: React.FC<CourseProps> = ({ level, setLevel }) => {
         className="flex-1 m-4 rounded-sm p-2 overflow-y-auto"
         style={{ maxHeight: '95vh' }}
       >
-        <h1>Courses for {getLevelName(level)}</h1>
+        <h1>Courses for {getUserLevelName(level)}</h1>
 
         {/* Grid layout for filtered courses */}
         <div className="grid grid-cols-3 gap-4">
@@ -54,7 +62,9 @@ const Course: React.FC<CourseProps> = ({ level, setLevel }) => {
                   key={course.id} // Add a key prop for unique identification
                   id={course.id}
                   image={course.image}
-                  levelOfAdvancement={getLevelName(course.levelOfAdvancement)} // Correct usage here
+                  levelOfAdvancement={getCourseLevelName(
+                    course.levelOfAdvancement
+                  )}
                   title={course.title}
                 />
               );
@@ -72,7 +82,7 @@ const Course: React.FC<CourseProps> = ({ level, setLevel }) => {
               key={course.id} // Add a key prop for unique identification
               id={course.id}
               image={course.image}
-              levelOfAdvancement={getLevelName(course.levelOfAdvancement)} // Use correct course level
+              levelOfAdvancement={getCourseLevelName(course.levelOfAdvancement)} // Use correct course level
               title={course.title}
             />
           ))}
