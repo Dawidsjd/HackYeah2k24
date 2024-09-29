@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import '../Exercises/styles.css'
 
 const CheckKnowledge = ({ level }: { level: number }) => {
   let knowledgeLevel: string = "no level";
@@ -34,9 +35,9 @@ const CheckKnowledge = ({ level }: { level: number }) => {
         </div>
       </div>
       <div
-        className={`w-32 h-32 rounded-full flex justify-center items-center ${circleColor}`}
+        className={`w-32 h-32 rounded-full flex justify-center drop-shadow-custom-2 items-center ${circleColor}`}
       >
-        <div className="w-28 h-28 rounded-full flex justify-center items-center bg-tertiary">
+        <div className="w-28 h-28 rounded-full flex justify-center items-center bg-tertiary drop-shadow-custom-2">
           <p className="text-m capitalize text-additional-first font-bold">
             {knowledgeLevel}
           </p>
