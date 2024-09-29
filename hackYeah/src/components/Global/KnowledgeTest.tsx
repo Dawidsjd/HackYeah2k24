@@ -18,26 +18,46 @@ const KnowledgeTest: React.FC<KnowledgeTestProps> = ({ setLevel }) => {
   });
 
   return (
-    <Exam
-      exercises={questions}
-      title="Knowledge Exam"
-      onEnd={(correctCounter: number) => {
-        setLevel(correctCounter); // Update the level based on correct answers
+    <div className='mt-28'>
+  <Exam
+    exercises={questions}
+    title="Knowledge Exam"
+    onEnd={(correctCounter: number) => {
+      let level = 0;
 
-        return (
-          <>
-            <span>Correct Answers: {correctCounter}</span>
-            <Link
-              to={"/"}
-              className="inline-flex items-center space-x-2 px-3 py-1 bg-primary text-additional-second rounded-md hover:bg-tertiary hover:text-primary transition-all"
-            >
-              <span>Go Back to Home</span>
-              <FaLongArrowAltRight />
-            </Link>
-          </>
-        );
-      }}
-    />
+      if (correctCounter >= 0 && correctCounter <= 3) {
+        level = 1;
+      } else if (correctCounter >= 4 && correctCounter <= 6) {
+        level = 2;
+      } else if (correctCounter >= 7) {
+        level = 3;
+      }
+
+      setLevel(level);
+
+      return (
+        <>
+          <span>Correct Answers: {correctCounter}</span>
+          <Link
+            to={'/'}
+            className="inline-flex items-center space-x-2 px-3 py-1 bg-primary text-additional-second rounded-md hover:bg-tertiary hover:text-primary transition-all"
+          >
+            <span>Go Back to Home</span>
+            <FaLongArrowAltRight />
+          </Link>
+          {/* Nowy przycisk "Back to Home" */}
+          <Link
+            to={'/'}
+            className="inline-flex items-center space-x-2 px-3 py-1 mt-2 bg-secondary text-white rounded-md hover:bg-secondary-dark transition-all"
+          >
+            Back to Home
+          </Link>
+        </>
+      );
+    }}
+  />
+</div>
+
   );
 };
 
