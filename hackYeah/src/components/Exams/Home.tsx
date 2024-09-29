@@ -1,21 +1,21 @@
-import { useState } from "react";
-import Sidebar from "../Global/Sidebar";
-import { Exams } from "./Exams";
-import Exam from "./Exam";
-import "../Exercises/styles.css";
+import { useState } from 'react';
+import Sidebar from '../Global/Sidebar';
+import { Exams } from './Exams';
+import Exam from './Exam';
+import '../Exercises/styles.css';
 
 const styles = {
   container: {
-    display: "flex",
-    height: "100vh",
-    overflow: "hidden",
+    display: 'flex',
+    height: '100vh',
+    overflow: 'hidden',
   } as React.CSSProperties,
 
   exerciseContainer: {
     flex: 1,
-    overflowY: "auto",
+    overflowY: 'auto',
     maxHeight: `calc(100vh - 50px)`, // Ustal wysokość sidebaru
-    padding: "10px",
+    padding: '10px',
   } as React.CSSProperties,
 };
 
@@ -28,7 +28,7 @@ const ExamStart = ({ level }: { level: number }) => {
   };
   const [correctAnswers, setCorrectAnswers] = useState<number>(0);
   const [totalAnswers, setTotalAnswers] = useState<number>(0);
-  const [imageSrc, setImageSrc] = useState("/wombat-neutral.png"); // Stan dla źródła obrazka
+  const [imageSrc, setImageSrc] = useState('/wombat-neutral.png'); // Stan dla źródła obrazka
 
   let recommendId = 0;
   if (level >= 0) recommendId = 1;
@@ -47,7 +47,7 @@ const ExamStart = ({ level }: { level: number }) => {
     setExamOpen(null);
     // Ustaw zdjęcie w zależności od poprawności odpowiedzi
     setImageSrc(
-      correctAnswers > totalAnswers / 2 ? "/wombat-win.png" : "/wombat-cry.png"
+      correctAnswers > totalAnswers / 2 ? '/wombat-win.png' : '/wombat-cry.png'
     );
   };
 
@@ -102,7 +102,7 @@ const ExamStart = ({ level }: { level: number }) => {
               <h1
                 className="text-2xl drop-shadow-custom"
                 style={{
-                  color: correctAnswers > totalAnswers / 2 ? "green" : "red",
+                  color: correctAnswers > totalAnswers / 2 ? 'green' : 'white',
                 }}
               >
                 Correct Answers: {correctAnswers} / {totalAnswers}
