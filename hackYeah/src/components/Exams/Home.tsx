@@ -56,7 +56,7 @@ const ExamStart = ({ level }: { level: number }) => {
       <div style={styles.container} className="bg-primary">
         <Sidebar />
         <div className="flex-1 m-4 rounded-sm p-2">
-          <p className="mb-2">Exam Recomennded to Pass into next level:</p>
+          <p className="mb-2">Exam Recommended to Pass into next level:</p>
           {recommendId < 3 ? (
             <div>
               <span
@@ -68,7 +68,7 @@ const ExamStart = ({ level }: { level: number }) => {
             </div>
           ) : (
             <span>
-              You have reached maximum level of knowledge that we provide
+              You have reached the maximum level of knowledge that we provide
             </span>
           )}
           <p className="mb-2">All Exams:</p>
@@ -83,7 +83,7 @@ const ExamStart = ({ level }: { level: number }) => {
               </span>
             ))}
           </div>
-          {examOpen != null && (
+          {examOpen != null ? (
             <Exam
               exercises={Exams[examOpen].exercises}
               title={Exams[examOpen].title}
@@ -95,6 +95,14 @@ const ExamStart = ({ level }: { level: number }) => {
                 handleExamEnd(correctCounter, setCounter, setQuestionNr);
               }}
             />
+          ) : (
+            totalAnswers === 0 && ( // Sprawdź, czy totalAnswers jest równe 0
+              <img
+                src="/wombat-mys.png"
+                alt="Wombat"
+                className="mx-auto w-96 h-96 drop-shadow-custom filter opacity-10"
+              />
+            )
           )}
           {/* Wyświetlanie wyniku po zakończeniu egzaminu */}
           {totalAnswers > 0 && (
