@@ -45,7 +45,7 @@ const Exercises = (props: ExerciseProps) => {
       props.onAnswer(isCorrect); // Wywołaj callback z odpowiedzią
       setAnswersVisible(true); // Przywróć widoczność odpowiedzi
       setQuestionVisible(true); // Przywróć widoczność pytania
-    }, 1500);
+    }, 750);
   };
 
   return (

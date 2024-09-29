@@ -16,6 +16,7 @@ module.exports = {
       },
       boxShadow: {
         'custom-light': '0 0 3px 2px rgba(245, 245, 245, 0.2)',
+        'custom-hover': '0 0 3px 2px rgba(245, 245, 245, 0.4)',
       },
       backgroundImage: {
         'tail-gradient': `linear-gradient(

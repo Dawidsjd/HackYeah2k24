@@ -2,8 +2,8 @@ import React from 'react';
 import { courses } from './Courses'; // Import your courses array
 import { CourseType } from '../../type'; // Typing for course objects
 import Sidebar from '../Global/Sidebar';
-import { Link } from 'react-router-dom';
 import CourseCard from './CourseCard';
+import { Link } from 'react-router-dom'; // Import Link for navigation
 
 interface CourseProps {
   level: number; // Current level prop
@@ -12,43 +12,77 @@ interface CourseProps {
 
 const Course: React.FC<CourseProps> = ({ level, setLevel }) => {
   // Function to determine level name
-  const getLevelName = (level: number): string => {
-    if (level >= 0 && level <= 3) {
+  const getCourseLevelName = (level: number): string => {
+    if (level === 1) {
       return 'Beginner';
-    } else if (level >= 4 && level <= 6) {
+    } else if (level === 2) {
       return 'Intermediate';
-    } else {
+    } else if (level === 3) {
       return 'Expert';
     }
+    return 'No Level'; // Default case
+  };
+
+  const getUserLevelName = (level: number): string => {
+    if (level > 6) return 'Expert';
+    if (level > 3) return 'Intermediate';
+    if (level >= 0) return 'Beginner';
+    return 'No level';
   };
 
   // Filter courses by the current level
   const filteredCourses = courses.filter(
-    (course: CourseType) => course.levelOfAdvancement === level
+    (course: CourseType) =>
+      getCourseLevelName(course.levelOfAdvancement) === getUserLevelName(level)
   );
 
   // Remaining courses not at the selected level
   const otherCourses = courses.filter(
-    (course: CourseType) => course.levelOfAdvancement !== level
+    (course: CourseType) =>
+      getCourseLevelName(course.levelOfAdvancement) !== getUserLevelName(level)
   );
+
+  console.log('Filtered Courses:', filteredCourses); // Debugging line
+  console.log('Other Courses:', otherCourses); // Debugging line
 
   return (
     <div className="flex bg-primary">
       <Sidebar />
-      <div className="flex-1 m-4 rounded-sm p-2">
-        <h1>Courses for {getLevelName(level)}</h1>
+      <div
+        className="flex-1 m-4 rounded-sm p-2 overflow-y-auto"
+        style={{ maxHeight: '95vh' }}
+      >
+        <h1>Courses for {getUserLevelName(level)}</h1>
+
+        {/* Conditional rendering for "No Level" */}
+        {getUserLevelName(level) === 'No level' && (
+          <div className="mb-4 flex justify-between items-center">
+            <p>Take the test to find out your level of advancement</p>
+            <Link to="/knowledge-test">
+              <button className="bg-secondary text-additional-second px-2 py-1 rounded-md hover:bg-additional-second hover:text-primary transition">
+                Take the Test
+              </button>
+            </Link>
+          </div>
+        )}
 
         {/* Grid layout for filtered courses */}
         <div className="grid grid-cols-3 gap-4">
           {filteredCourses.length > 0 ? (
-            filteredCourses.map((course: CourseType) => (
-              <CourseCard
-                key={course.id} // Add a key prop for unique identification
-                id={course.id}
-                levelOfAdvancement={getLevelName(course.levelOfAdvancement)}
-                title={course.title}
-              />
-            ))
+            filteredCourses.map((course: CourseType) => {
+              console.log('Course Level:', course.levelOfAdvancement); // Debugging line
+              return (
+                <CourseCard
+                  key={course.id} // Add a key prop for unique identification
+                  id={course.id}
+                  image={course.image}
+                  levelOfAdvancement={getCourseLevelName(
+                    course.levelOfAdvancement
+                  )}
+                  title={course.title}
+                />
+              );
+            })
           ) : (
             <p>No courses available at this level.</p>
           )}
@@ -61,7 +95,8 @@ const Course: React.FC<CourseProps> = ({ level, setLevel }) => {
             <CourseCard
               key={course.id} // Add a key prop for unique identification
               id={course.id}
-              levelOfAdvancement={getLevelName(course.levelOfAdvancement)}
+              image={course.image}
+              levelOfAdvancement={getCourseLevelName(course.levelOfAdvancement)} // Use correct course level
               title={course.title}
             />
           ))}

@@ -1,9 +1,9 @@
-import { FullExcercises } from '../Exercises/CoursesExcercises';
-import Exam from '../Exams/Exam';
-import { ExerciseType } from '../../type';
-import { Link } from 'react-router-dom';
-import { FaLongArrowAltRight } from 'react-icons/fa';
-import { shuffle } from '../Exercises/Exercises';
+import { FullExcercises } from "../Exercises/CoursesExcercises";
+import Exam from "../Exams/Exam";
+import { ExerciseType } from "../../type";
+import { Link } from "react-router-dom";
+import { FaLongArrowAltRight } from "react-icons/fa";
+import { shuffle } from "../Exercises/Exercises";
 
 interface KnowledgeTestProps {
   setLevel: (level: number) => void; // Specify the type for setLevel
