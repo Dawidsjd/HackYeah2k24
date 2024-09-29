@@ -7,14 +7,13 @@ const TradingViewWidget: React.FC = () => {
       'https://s3.tradingview.com/external-embedding/embed-widget-timeline.js';
     script.async = true;
     script.innerHTML = JSON.stringify({
-      feedMode: 'market',
-      isTransparent: true,
+      feedMode: 'all_symbols',
+      isTransparent: false,
       displayMode: 'regular',
       width: '100%',
-      height: '100%',
-      colorTheme: 'light',
+      height: 325,
+      colorTheme: 'dark',
       locale: 'en',
-      market: 'crypto',
     });
 
     const container = document.getElementById('tradingview-widget');
@@ -30,10 +29,10 @@ const TradingViewWidget: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-transparent h-full w-full p-2 shadow-md  ">
+    <div className="tradingview-widget-container w-full flex justify-center items-center">
       <div
         id="tradingview-widget"
-        className="tradingview-widget-container__widget  w-full h-full "
+        className="tradingview-widget-container__widget shadow-custom-light rounded-2xl overflow-hidden"
       ></div>
     </div>
   );
