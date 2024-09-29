@@ -100,7 +100,7 @@ const ExamStart = ({ level }: { level: number }) => {
               <img
                 src="/wombat-mys.png"
                 alt="Wombat"
-                className="mx-auto w-96 h-96 drop-shadow-custom filter opacity-10"
+                className="mx-auto w-96 h-96 drop-shadow-custom filter opacity-10 pointer-events-none select-none`"
               />
             )
           )}
@@ -119,7 +119,7 @@ const ExamStart = ({ level }: { level: number }) => {
               <img
                 src={imageSrc}
                 alt="Wombat"
-                className="mx-auto w-64 h-64 drop-shadow-custom"
+                className="mx-auto w-64 h-64 drop-shadow-custom pointer-events-none select-none"
               />
             </div>
           )}

@@ -57,7 +57,7 @@ const Exercises = (props: ExerciseProps) => {
           <img
             src={imageSrc}
             alt="Wombat"
-            className={`mx-auto mb-4 w-64 h-64 drop-shadow-custom transition-all duration-300 ${
+            className={`mx-auto mb-4 w-64 h-64 drop-shadow-custom pointer-events-none select-none transition-all duration-300 ${
               !answersVisible ? 'mt-20' : ''
             }`}
           />
