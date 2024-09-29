@@ -1,12 +1,13 @@
 import React from 'react';
+import './Welcome.css'; // Importuj plik CSS dla animacji
 
-const Welcome = () => {
+const Welcome: React.FC = () => {
   return (
-    <div>
-      <h1 className="text-additional-second text-3xl bold ">
-        Welcome to Investify 🖐️
+    <div className="welcome-container">
+      <h1 className="text-additional-second text-6xl bold fade-in">
+        Welcome to <b>Investify</b>
       </h1>
-      <span className="text-neutral">Description text to setup</span>
+      <span className="text-neutral fade-in">Description text to setup</span>
     </div>
   );
 };
