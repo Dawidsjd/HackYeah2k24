@@ -12,7 +12,7 @@ const Panel = ({ level }: { level: number }) => {
         <div className={`justify-start w-1/2 bg-secondary ${tileStyle}`}>
           <CheckKnowledge level={level} />
         </div>
-        <div className={`justify-end  w-1/2 ${tileStyle}`}>
+        <div className={`justify-end bg-[#1e222d] w-1/2 ${tileStyle}`}>
           <QuickStart />
         </div>
       </div>
