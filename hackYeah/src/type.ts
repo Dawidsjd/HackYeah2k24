@@ -23,10 +23,11 @@ export type ExamProps = {
 
 export type CourseType = {
   id: number;
-  title: String;
-  introduction: String;
-  mainArticlePartOne: String;
-  mainArticlePartTwo: String;
+  image: string;
+  title: string;
+  introduction: string;
+  mainArticlePartOne: string;
+  mainArticlePartTwo: string;
   levelOfAdvancement: number;
-  linkToArticle: String;
+  linkToArticle: string;
 };
