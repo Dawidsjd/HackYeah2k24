@@ -72,7 +72,7 @@ const Exercises = (props: ExerciseProps) => {
                 <div
                   key={num}
                   onClick={() => handleAnswer(answersTab[num].correct)}
-                  className="cursor-pointer p-2 rounded-md transition-colors duration-300 hover:bg-gray-700"
+                  className="cursor-pointer p-2 rounded-md transition-colors duration-300 shadow-md hover:bg-gray-700"
                 >
                   {answersTab[num].answer}
                 </div>
