@@ -19,6 +19,7 @@ export type ExamProps = {
   exercises: ExerciseType[];
   title: string;
   onEnd: any;
+  knowledgeTest?: boolean;
 };
 
 export type CourseType = {

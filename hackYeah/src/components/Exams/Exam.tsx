@@ -17,10 +17,11 @@ const Exam = (props: ExamProps) => {
   };
 
   // Resetuje stany za każdym razem, gdy zmieniają się props.title lub props.exercises
-  useEffect(() => {
-    setCounter(0);
-    setQuestionNr(0);
-  }, [title, exercises]);
+  if (!props.knowledgeTest)
+    useEffect(() => {
+      setCounter(0);
+      setQuestionNr(0);
+    }, [title, exercises]);
 
   return (
     <div>
