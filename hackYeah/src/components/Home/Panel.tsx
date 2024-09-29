@@ -18,7 +18,7 @@ const Panel = ({ level }: { level: number }) => {
         <div className={`justify-start w-2/3 bg-tail-gradient ${tileStyle}`}>
           <CryptoList />
         </div>
-        <div className={`justify-end w-1/3 h-[40vh] ${tileStyle}`}>
+        <div className={`justify-end w-1/3 h-[40vh]`}>
           <CryptoNews />
         </div>
       </div>
