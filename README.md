@@ -1,4 +1,8 @@
-# Investify
+<p align="center">
+  <img src="/logo.png" alt="Investify Logo" width="100" />  <!-- Adjust width as needed -->
+  <h1 align="center">Investify</h1>
+</p>
+
 
 ## Overview
 "Investify" is an educational application designed to teach users about traditional markets and the cryptocurrency market. The app includes essential learning materials and allows users to assess their knowledge through quizzes and exercises. It also features a demo trading option, enabling users to manage fictional money in cryptocurrency markets and learn various trading strategies using advanced charting options.
