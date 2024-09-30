@@ -5,8 +5,16 @@
 <br/>
 <br/>
 
+
 ## Overview
 <b>"Investify"</b> is an educational application designed to teach users about traditional markets and the cryptocurrency market. The app includes essential learning materials and allows users to assess their knowledge through quizzes and exercises. It also features a demo trading option, enabling users to manage fictional money in cryptocurrency markets and learn various trading strategies using advanced charting options.
+
+<br/>
+<div align="center">
+<img src="hackYeah/public/overview.png" alt="Overview" width="65%" />
+</div>
+<br/>
+
 
 ## Team Members
 - <b>Michał Kociołek</b> - FrontEnd
