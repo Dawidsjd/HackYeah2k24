@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/logo.png" alt="Investify Logo" width="100" />  <!-- Adjust width as needed -->
+  <img src="hackYeah/public/logo.png" alt="Investify Logo" width="100" />  <!-- Adjust width as needed -->
   <h1 align="center">Investify</h1>
 </p>
 
